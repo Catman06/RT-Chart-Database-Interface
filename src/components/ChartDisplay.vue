@@ -51,7 +51,7 @@ import { computed } from 'vue';
 		background-color: #a5a078;
 		padding: 10px;
 		margin: 5px;
-
+		
 		&>div {
 			display: flex;
 			justify-content: space-around;
