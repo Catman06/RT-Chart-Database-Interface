@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "sudo rm -r /srv/http/nginx/ValentineDynasty/*; sudo cp -r dist/* /srv/http/nginx/ValentineDynasty/ && sudo mv /srv/http/nginx/ValentineDynasty/php/* /srv/http/nginx/php/ && sudo rm -r /srv/http/nginx/ValentineDynasty/php;"
   },
   "dependencies": {
     "vue": "^3.5.17"
