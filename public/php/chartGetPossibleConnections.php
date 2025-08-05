@@ -14,19 +14,24 @@ try {
 	$dbh = new PDO('pgsql:host=localhost;port=5432;dbname=valentine_dynasty_charts;user=valentine');
 } catch (Exception $ex) {
 	$response["error"] = "Connection failed: " . $ex.getMessage();
+	throw new Exception("Connection Failed", 1);
 }
 
 // Get what connections are available based on the passed direction and location
 try {
 	$dbh->beginTransaction();
+
+	// Create the statement
 	$stmt;
 	if ($_GET['dir'] == "from") {
-		$stmt = $dbh->prepare("SELECT endpoint FROM charts WHERE start = '" . $_GET['location'] . "';");
+		$stmt = $dbh->prepare("SELECT endpoint FROM charts WHERE start = ?;");
 	} elseif ($_GET['dir'] == "to") {
-		$stmt = $dbh->prepare("SELECT start FROM charts WHERE endpoint = '" . $_GET['location'] . "';");
+		$stmt = $dbh->prepare("SELECT start FROM charts WHERE endpoint = ?;");
 	} else {
-		throw new Exception("No valid 'dir' given.", 1);
+		$response["error"] = "Invalid 'dir' given: " . $ex.getMessage();
+		throw new Exception("Invalid 'dir' given.", 1);
 	}
+	$stmt->bindParam(1, $_GET['location']);
 
 	$stmt->execute();
 	foreach ($stmt->fetchAll() as $system) {

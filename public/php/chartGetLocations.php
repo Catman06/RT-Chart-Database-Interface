@@ -1,12 +1,22 @@
 <?php
+function exception_handler(Throwable $ex) {
+	echo json_encode($response);
+	exit(1);
+}
+
 $response = [];
 
+// Create a connection to the db
 try {
-	// Create a connection to the db
 	$dbh = new PDO('pgsql:host=localhost;port=5432;dbname=valentine_dynasty_charts;user=valentine');
-	$dbh->beginTransaction();
+} catch (Exception $ex) {
+	$response["error"] = "Connection failed: " . $ex.getMessage();
+	throw new Exception("Connection failed", 1);
+}
 
-	// Get all locations featured in the charts
+// Get all locations featured in the charts
+try {
+	$dbh->beginTransaction();
 	$stmt = $dbh->prepare('SELECT start AS location FROM charts UNION SELECT endpoint FROM charts;');
 	$stmt->execute();
 	foreach ($stmt->fetchAll() as $system) {
@@ -14,6 +24,7 @@ try {
 	}
 } catch (Exception $ex) {
 	$response["error"] = $ex;
+	throw new Exception("Connection failed", 1);
 }
 
 // return all locations
