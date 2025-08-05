@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-	const props = defineProps(['chartIn']);
+	const props = defineProps(['chartIn', 'list']);
 
 	const chart = computed(() => {
-		console.log(props.chartIn);
-		return props.chartIn ? props.chartIn[0] : "Nothing";
+		return props.chartIn ? props.chartIn : undefined;
 	})
 </script>
 
 <template>
-	<div>
+	<div id="info" v-if="chart">
 		<p class="label">Starting Location</p>
 		<p>{{ chart['start'] }}</p>
 		<p class="label">Ending Location</p>
@@ -25,9 +24,12 @@ import { computed } from 'vue';
 		<p>{{ chart['maker'] }}</p>
 		<p class="label">Astronomican</p>
 		<p>{{ chart['astronomican'] }}</p>
-		<p class="label">Special Rules</p>
-		<p v-if="chart['rules'] != null">{{ chart['rules'] }}</p>
+		<p class="label" v-if="chart['rules']">Special Rules</p>
+		<p >{{ chart['rules'] }}</p>
 	</div>
+	<ul id="list" v-else-if="list">
+		<li v-for="item in list">{{ item }}</li>
+	</ul>
 </template>
 
 <style lang="css" scoped>
