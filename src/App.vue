@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import ChartDisplay from './components/ChartDisplay.vue';
 
 const locations = ref();
 const startOptions = ref();
 const endOptions = ref();
+const chart = ref();
 
 let form;
 let startField: HTMLInputElement | null;
@@ -24,14 +26,13 @@ async function getChart(start: string, end: string) {
 
 onMounted(async () => {
   let response = await getLocations();
-  console.log(response);
   locations.value = response;
 
   form = document.querySelector('form');
   startField = document.querySelector("#startInput");
   endField = document.querySelector("#endInput");
   
-  console.log(document.querySelector("form"));
+  // When startInput is focused, get the possible connections to display
   startField?.addEventListener('focus', async function(_event) {
     // If the field has a value, get and show the possible connections for it
     // If the field is empty, show all locations as suggestions
@@ -41,6 +42,8 @@ onMounted(async () => {
       startOptions.value = locations.value;
     }
   })
+
+  // When endInput is focused, get the possible connections to display
   endField?.addEventListener('focus', async function(_event) {
     // If the field has a value, get and show the possible connections for it
     // If the field is empty, show all locations as suggestions
@@ -50,15 +53,19 @@ onMounted(async () => {
       endOptions.value = locations.value;
     }
   })
-  
-  form?.addEventListener('submit', function(event) {
+
+  // When the 'Get Chart' button is pressed, try to get the requested chart
+  form?.addEventListener('submit', async function(event) {
     event.preventDefault();
+    // If both fields have content, request the chart with the specified start and end
+    if ((endField ? endField.value : "" != "") && (startField ? startField.value : "" != "")) {
+      chart.value = await getChart(startField?.value ? startField.value : "", endField?.value ? endField.value : "");
+    }
   })
 })
 </script>
 
 <template>
-  <div>
     <form>
       <label for=start>Starting Location</label>
       <input list="starts" name="start" id="startInput" autocomplete="off">
@@ -74,7 +81,8 @@ onMounted(async () => {
 
       <input type="submit" value="Get Chart"></input>
     </form>
-  </div>
+
+    <ChartDisplay :chartIn="chart" />
 </template>
 
 <style scoped>
