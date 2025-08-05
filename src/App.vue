@@ -12,12 +12,14 @@ let endField: HTMLInputElement | null;
 async function getLocations() {
   return (await fetch("https://zipperserver.duckdns.org/php/chartGetLocations.php")).json();
 }
-
-async function getStarts(end) {
-  return (await fetch(`https://zipperserver.duckdns.org/php/chartGetPossibleConnections.php?dir=from&location=${end}`)).json();
+async function getStarts(end: string) {
+  return (await fetch(`https://zipperserver.duckdns.org/php/chartGetPossibleConnections.php?dir=to&location=${end}`)).json();
 }
-async function getEndpoints(start) {
-  return (await fetch(`https://zipperserver.duckdns.org/php/chartGetPossibleConnections.php?dir=to&location=${start}`)).json();
+async function getEndpoints(start: string) {
+  return (await fetch(`https://zipperserver.duckdns.org/php/chartGetPossibleConnections.php?dir=from&location=${start}`)).json();
+}
+async function getChart(start: string, end: string) {
+  return (await fetch(`https://zipperserver.duckdns.org/php/chartGetChart.php?start=${start}&endpoint=${end}`)).json();
 }
 
 onMounted(async () => {
@@ -33,9 +35,8 @@ onMounted(async () => {
   startField?.addEventListener('focus', async function(_event) {
     // If the field has a value, get and show the possible connections for it
     // If the field is empty, show all locations as suggestions
-    console.log(endField ? endField.value : "Nothing");
     if (endField ? endField.value : "" != "") {
-      startOptions.value = await getStarts(endField?.value);
+      startOptions.value = await getStarts(endField?.value ? endField.value : "");
     } else {
       startOptions.value = locations.value;
     }
@@ -43,9 +44,8 @@ onMounted(async () => {
   endField?.addEventListener('focus', async function(_event) {
     // If the field has a value, get and show the possible connections for it
     // If the field is empty, show all locations as suggestions
-    console.log(startField ? startField.value : "Nothing");
     if (startField ? startField.value : "" != "") {
-      endOptions.value = await getEndpoints(startField?.value);
+      endOptions.value = await getEndpoints(startField?.value ? startField.value : "");
     } else {
       endOptions.value = locations.value;
     }
