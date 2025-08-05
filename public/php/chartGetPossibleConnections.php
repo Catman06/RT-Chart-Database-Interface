@@ -41,9 +41,5 @@ try {
 	$response["error"] = "Failed to form a response: " . $ex.getMessage();
 }
 
-	// Get the possible destinations
-
-
-// return all locations
 echo json_encode($response);
 ?>
