@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-	const props = defineProps(['chartIn', 'list']);
+	const props = defineProps(['chartIn']);
 
 	const chart = computed(() => {
 		return props.chartIn ? props.chartIn : undefined;
@@ -27,9 +27,6 @@ import { computed } from 'vue';
 		<p class="label" v-if="chart['rules']">Special Rules</p>
 		<p >{{ chart['rules'] }}</p>
 	</div>
-	<ul id="list" v-else-if="list">
-		<li v-for="item in list">{{ item }}</li>
-	</ul>
 </template>
 
 <style lang="css" scoped>
