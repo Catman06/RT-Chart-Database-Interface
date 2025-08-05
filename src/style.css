@@ -28,14 +28,16 @@ body {
   padding: 2rem;
   text-align: center;
   filter: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"> \
-    <filter id="noise" x="0%" y="0%" width="100%" height="100%"> \
-        <feTurbulence type="turbulence" seed="1" baseFrequency="0 0.001" result="NOISE" numOctaves=".1"> \
-        <animate attributeName="baseFrequency" values="0 0.001;0 0.003;0 0.001" dur="500s" repeatCount="indefinite" /> \
+    <filter id="glitch" x="0%" y="0%" width="100%" height="300%"> \
+        <feTurbulence type="fractal" seed="1" baseFrequency="0 0.001" result="NOISE" numOctaves=".1"> \
           <animate attributeName="seed" values="1;1000;1" dur="500s" repeatCount="indefinite" /> \
         </feTurbulence> \
-        <feDisplacementMap in="SourceGraphic" in2="NOISE" scale="2.00005" xChannelSelector="R" yChannelSelector="A"></feDisplacementMap> \
+        <feOffset in="NOISE" dx="0" dy="10" result="OFFSET"> \
+          <animate attributeName="dy" values="0;-300" dur="10s" repeatCount="indefinite" /> \
+        </feOffset> \
+        <feDisplacementMap in="SourceGraphic" in2="OFFSET" scale="2.00005" xChannelSelector="R" yChannelSelector="A" /> \
     </filter> \
-  </svg>#noise');
+  </svg>#glitch');
 }
 
 @media (prefers-color-scheme: light) {
