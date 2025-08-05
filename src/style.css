@@ -1,12 +1,12 @@
 :root {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Courier New', Courier, monospace;
   font-size: large;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgb(100, 218, 85);
+  background-color: #1b1b1b;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -29,10 +29,11 @@ body {
   text-align: center;
   filter: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"> \
     <filter id="noise" x="0%" y="0%" width="100%" height="100%"> \
-        <feTurbulence baseFrequency="0.0001 40" result="NOISE" numOctaves="2"> \
-          <animate attributeName="baseFrequency" values="0.0001 45;0.0001 50;0.0001 45" dur="10000s" repeatCount="indefinite" /> \
+        <feTurbulence type="turbulence" seed="1" baseFrequency="0 0.001" result="NOISE" numOctaves=".1"> \
+        <animate attributeName="baseFrequency" values="0 0.001;0 0.003;0 0.001" dur="500s" repeatCount="indefinite" /> \
+          <animate attributeName="seed" values="1;1000;1" dur="500s" repeatCount="indefinite" /> \
         </feTurbulence> \
-        <feDisplacementMap in="SourceGraphic" in2="NOISE" scale="1" xChannelSelector="R" yChannelSelector="R"></feDisplacementMap> \
+        <feDisplacementMap in="SourceGraphic" in2="NOISE" scale="2.00005" xChannelSelector="R" yChannelSelector="A"></feDisplacementMap> \
     </filter> \
   </svg>#noise');
 }
