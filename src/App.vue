@@ -45,7 +45,7 @@ onMounted(async () => {
     // If the field is empty, show all locations as suggestions
     console.log(startField ? startField.value : "Nothing");
     if (startField ? startField.value : "" != "") {
-      endOptions.value = await getStarts(startField?.value);
+      endOptions.value = await getEndpoints(startField?.value);
     } else {
       endOptions.value = locations.value;
     }
