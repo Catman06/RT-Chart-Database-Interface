@@ -74,7 +74,6 @@ onMounted(async () => {
       showNewButton = false;
     }
   })
-
 })
 
 </script>
@@ -99,7 +98,7 @@ onMounted(async () => {
   <button type="submit" form="locationInput">Get Charts</button>
   <button type="button" v-if="showNewButton" @click="showNew = true">Make New Chart</button>
 
-  <NewChart v-if="showNew" :start="startField?.value" :end="endField?.value" @closeModal="showNew = false"/>
+  <NewChart v-if="showNew" :start="startField?.value" :end="endField?.value" @closeModal="showNew = false; showNewButton = false"/>
   <ChartDisplay v-for="chart in charts" :chartIn="chart" />
 </template>
 

@@ -7,7 +7,6 @@ function exception_handler(Throwable $ex) {
 
 $response = [];
 
-$response["post"] = $_POST;
 // Create a connection to the db
 try {
 	$dbh = new PDO('pgsql:host=localhost;port=5432;dbname=valentine_dynasty_charts;user=valentine');

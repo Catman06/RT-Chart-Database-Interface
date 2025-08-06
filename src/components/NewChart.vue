@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-
 	const props = defineProps(['start', 'end']);
+	const emit = defineEmits(['closeModal']);
+
 	let form: HTMLElement | null;
 	onMounted(() => {
 		form = document.getElementById("newChartForm");
@@ -14,12 +15,18 @@ import { onMounted } from 'vue';
 		
 		let formdata = new FormData(form);
 		
-		const response = await fetch("https://zipperserver.duckdns.org/php/chartAddChart.php", {
+		const response = (await fetch("https://zipperserver.duckdns.org/php/chartAddChart.php", {
 			method: "POST",
 			body: formdata
-		})
-		
-		console.log(response);
+		})).json();
+
+		// If the chart was added successfully, i.e. no return info, close the modal
+		// If not, print the error to the console
+		if ((await response).length != 0) {
+			console.error("Error when submitting the new chart:", response);
+		}
+		// Close the modal
+		emit('closeModal');
 	}
 </script>
 
@@ -44,7 +51,7 @@ import { onMounted } from 'vue';
 			<div>
 				<div>
 					<label for="duration">Travel Duration</label>
-					<input id="newDuration" type="number" name="duration">
+					<input id="newDuration" type="number" name="duration" value="0">
 				</div>
 				<div>	
 					<label for="quality">Chart Quality</label>
