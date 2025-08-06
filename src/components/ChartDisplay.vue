@@ -48,7 +48,7 @@ import { computed } from 'vue';
 <style lang="css" scoped>
 	#info {
 		color: inherit;
-		background-color: #1e201c;
+		background-color: var(--light_background);
 		border: 2px solid var(--line_color);
 		padding: 10px;
 		margin: 5px;

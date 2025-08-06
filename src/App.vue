@@ -71,6 +71,10 @@ onMounted(async () => {
       showNewButton = false;
     }
   })
+
+  // Hide the praise of the machine god once the page fully loads
+  let praiseElement = document.getElementById("praise");
+  praiseElement ? praiseElement.hidden = true : false;
 })
 
 </script>

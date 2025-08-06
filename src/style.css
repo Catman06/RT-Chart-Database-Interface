@@ -6,14 +6,15 @@
 
   color-scheme: light dark;
   color: var(--line_color);
-  background-color: #1b1b1b;
+  background-color: #171d19;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --line_color: rgb(100, 218, 85);
+  --line_color: rgb(147, 248, 178);
+  --light_background: #1a241d;
 }
 
 body {
@@ -44,6 +45,7 @@ body {
 button {
   font: inherit;
   color: inherit;
+  background-color: var(--light_background);
   border-color: inherit;
   margin: 1rem;
 }
@@ -51,7 +53,7 @@ button {
 input {
   color: inherit;
   font: inherit;
-  background-color: inherit;
+  background-color: var(--light_background);
   border-color: inherit;
   border-style: solid;
   width: 95%;
