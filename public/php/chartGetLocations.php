@@ -1,4 +1,5 @@
 <?php
+set_exception_handler('exception_handler');
 function exception_handler(Throwable $ex) {
 	echo json_encode($response);
 	exit(1);
@@ -23,8 +24,8 @@ try {
 		$response[] = $system[0];
 	}
 } catch (Exception $ex) {
-	$response["error"] = $ex;
-	throw new Exception("Connection failed", 1);
+	$response["error"] = "Failed to get all locations: " . $ex.getMessage();
+	throw new Exception("Failed to get all locations", 1);
 }
 
 // return all locations

@@ -1,7 +1,7 @@
 <?php
 // Returns the connections to/from a given location
 // Takes 'dir' as either 'to' or 'from' and location as the name of the location
-
+set_exception_handler('exception_handler');
 function exception_handler(Throwable $ex) {
 	echo json_encode($response);
 	exit(1);

@@ -1,6 +1,6 @@
 <?php
 // Returns the full info for a given 'start' and 'endpoint'
-
+set_exception_handler('exception_handler');
 function exception_handler(Throwable $ex) {
 	echo json_encode($response);
 	exit(1);
