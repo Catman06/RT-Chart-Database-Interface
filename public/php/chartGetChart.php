@@ -2,7 +2,7 @@
 // Returns the full info for a given 'start' and 'endpoint'
 set_exception_handler('exception_handler');
 function exception_handler(Throwable $ex) {
-	echo json_encode($response);
+	echo $ex;
 	exit(1);
 }
 
@@ -12,8 +12,7 @@ $response = [];
 try {
 	$dbh = new PDO('pgsql:host=localhost;port=5432;dbname=valentine_dynasty_charts;user=valentine');
 } catch (Exception $ex) {
-	$response["error"] = "Connection failed: " . $ex.getMessage();
-	throw new Exception("Connection Failed", 1);
+	throw new Exception("Connection failed: " . $ex, 1);
 }
 
 // Get what charts are available based on the passed information
@@ -42,7 +41,7 @@ try {
 	$stmt->execute();
 	$response = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $ex) {
-	$response["error"] = "Failed to form a response: " . $ex.getMessage();
+	throw new Exception("Failed to form a response: " . $ex, 1);
 }
 
 // return all locations

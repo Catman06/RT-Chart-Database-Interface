@@ -15,6 +15,7 @@
 
   --line_color: rgb(147, 248, 178);
   --light_background: #1a241d;
+  --lighter_background: #2c3d31;
 }
 
 body {
@@ -48,15 +49,27 @@ button {
   background-color: var(--light_background);
   border-color: inherit;
   margin: 1rem;
+  padding: 0rem .5rem;
+}
+
+button:hover {
+  background-color: var(--lighter_background);
 }
 
 input {
   color: inherit;
   font: inherit;
   background-color: var(--light_background);
+  caret-shape: block;
   border-color: inherit;
   border-style: solid;
   width: 95%;
+}
+
+input:focus-visible {
+  border-color: rgb(191, 255, 210);
+  background-color: var(--lighter_background);
+  outline: .1rem solid var(--line_color);
 }
 
 label {

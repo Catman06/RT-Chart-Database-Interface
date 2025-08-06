@@ -1,7 +1,7 @@
 <?php
 set_exception_handler('exception_handler');
 function exception_handler(Throwable $ex) {
-	echo json_encode($response);
+	echo $ex;
 	exit(1);
 }
 
@@ -11,8 +11,7 @@ $response = [];
 try {
 	$dbh = new PDO('pgsql:host=localhost;port=5432;dbname=valentine_dynasty_charts;user=valentine');
 } catch (Exception $ex) {
-	$response["error"] = "Connection failed: " . $ex.getMessage();
-	throw new Exception("Connection failed", 1);
+	throw new Exception("Connection failed: " . $ex, 1);
 }
 
 // Get all locations featured in the charts
@@ -24,8 +23,7 @@ try {
 		$response[] = $system[0];
 	}
 } catch (Exception $ex) {
-	$response["error"] = "Failed to get all locations: " . $ex.getMessage();
-	throw new Exception("Failed to get all locations", 1);
+	throw new Exception("Failed to get all locations: " . $ex, 1);
 }
 
 // return all locations

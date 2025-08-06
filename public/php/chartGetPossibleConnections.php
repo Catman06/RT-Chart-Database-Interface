@@ -3,7 +3,7 @@
 // Takes 'dir' as either 'to' or 'from' and location as the name of the location
 set_exception_handler('exception_handler');
 function exception_handler(Throwable $ex) {
-	echo json_encode($response);
+	echo $ex;
 	exit(1);
 }
 
@@ -13,8 +13,7 @@ $response = [];
 try {
 	$dbh = new PDO('pgsql:host=localhost;port=5432;dbname=valentine_dynasty_charts;user=valentine');
 } catch (Exception $ex) {
-	$response["error"] = "Connection failed: " . $ex.getMessage();
-	throw new Exception("Connection Failed", 1);
+	throw new Exception("Connection failed: " . $ex, 1);
 }
 
 // Get what connections are available based on the passed direction and location
@@ -28,7 +27,7 @@ try {
 	} elseif ($_GET['dir'] == "to") {
 		$stmt = $dbh->prepare("SELECT start FROM charts WHERE endpoint = ?;");
 	} else {
-		$response["error"] = "Invalid 'dir' given: " . $ex.getMessage();
+		$response["error"] = "Invalid 'dir' given: " . $ex;
 		throw new Exception("Invalid 'dir' given.", 1);
 	}
 	$stmt->bindParam(1, $_GET['location']);
@@ -38,7 +37,7 @@ try {
 		$response[] = $system[0];
 	}
 } catch (Exception $ex) {
-	$response["error"] = "Failed to form a response: " . $ex.getMessage();
+	throw new Exception("Failed to form a response: " . $ex, 1);
 }
 
 echo json_encode($response);

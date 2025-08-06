@@ -1,5 +1,26 @@
 <script lang="ts" setup>
+import { onMounted } from 'vue';
+
 	const props = defineProps(['start', 'end']);
+	let form: HTMLElement | null;
+	onMounted(() => {
+		form = document.getElementById("newChartForm");
+	})
+
+
+	// Submits the form to the database
+	async function submit(_event: Event) {
+		if (!(form instanceof HTMLFormElement)) { return };
+		
+		let formdata = new FormData(form);
+		
+		const response = await fetch("https://zipperserver.duckdns.org/php/chartAddChart.php", {
+			method: "POST",
+			body: formdata
+		})
+		
+		console.log(response);
+	}
 </script>
 
 <template>
@@ -9,11 +30,11 @@
 			<div>
 				<div>
 					<label for="start">Starting Location</label>
-					<input id="newStart" name="start" :placeholder="props.start">
+					<input id="newStart" name="start" required :value="props.start">
 				</div>
 				<div>
-					<label for="end">Ending Location</label>
-					<input id="newEnd" name="end" :placeholder="props.end">
+					<label for="endpoint">Ending Location</label>
+					<input id="newEnd" name="endpoint" required :value="props.end">
 				</div>
 				<div>
 					<label for="stability">Route Stability</label>
@@ -23,7 +44,7 @@
 			<div>
 				<div>
 					<label for="duration">Travel Duration</label>
-					<input id="newDuration" name="duration">
+					<input id="newDuration" type="number" name="duration">
 				</div>
 				<div>	
 					<label for="quality">Chart Quality</label>
@@ -43,7 +64,7 @@
 					<label for="rules">Special Rules</label>
 					<textarea id="newRules" name="rules" resize="none" />
 				</div>
-				<button type="submit">Create Chart</button>
+				<button type="button" @click="submit">Create Chart</button>
 			</div>
 		</form>
 	</div>

@@ -28,6 +28,9 @@ async function getChart(start: string, end: string) {
 }
 
 onMounted(async () => {
+  // Hide the praise of the machine god once the page fully loads
+  let praiseElement = document.getElementById("praise");
+  praiseElement ? praiseElement.hidden = true : false;
   let response = await getLocations();
   locations.value = response;
 
@@ -72,9 +75,6 @@ onMounted(async () => {
     }
   })
 
-  // Hide the praise of the machine god once the page fully loads
-  let praiseElement = document.getElementById("praise");
-  praiseElement ? praiseElement.hidden = true : false;
 })
 
 </script>
