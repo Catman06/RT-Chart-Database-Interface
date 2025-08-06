@@ -54,8 +54,10 @@ input {
   background-color: inherit;
   border-color: inherit;
   border-style: solid;
+  width: 95%;
 }
 
 label {
   margin: 0rem 1rem 0rem 0rem;
+  text-align: center;
 }
