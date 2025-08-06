@@ -38,17 +38,18 @@ import { computed } from 'vue';
 				<p>{{ chart['maker'] }}</p>
 			</div>
 		</div>
-			<p class="label">Astronomican</p>
+		<p class="label">Astronomican</p>
 		<p>{{ chart['astronomican'] }}</p>
 		<p class="label" v-if="chart['rules']">Special Rules</p>
-		<p >{{ chart['rules'] }}</p>
+		<p>{{ chart['rules'] }}</p>
 	</div>
 </template>
 
 <style lang="css" scoped>
 	#info {
-		color: rgba(0, 0, 0, 0.729);
-		background-color: #a5a078;
+		color: inherit;
+		background-color: #1e201c;
+		border: 2px solid var(--line_color);
 		padding: 10px;
 		margin: 5px;
 		
