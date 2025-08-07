@@ -13,6 +13,7 @@
 img {
 	padding: 2rem;
 	max-height: 80vh;
+	max-width: 75vw;
 }
 #loginText {
 	text-align: left;

@@ -42,7 +42,7 @@ function switchTab(num: number) {
   background-color: var(--navbar_color);
   border: .4rem outset #68675c;
   border-bottom-style: none;
-  width: 50vw;
+  width: 80vw;
   height: 4rem;
 
   & img {
