@@ -107,6 +107,7 @@ onMounted(async () => {
     justify-content: space-around;
     align-items: center;
     height: 3rem;
+    padding: 1rem;
   }
 
   .locationInput {

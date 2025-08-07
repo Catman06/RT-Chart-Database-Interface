@@ -23,27 +23,50 @@ function switchTab(num: number) {
   </div>
 
   <div id="navbar">
-    <p class="navTabs" @click="switchTab(0)">Home</p>
-    <p class="navTabs" @click="switchTab(1)">Charts</p>
+    <div id="navTabHolder">
+      <p class="navTabs" @click="switchTab(0)">Home</p>
+      <p class="navTabs" @click="switchTab(1)">Charts</p>
+    </div>
   </div>
 </template>
 
 <style lang="css" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 #navbar {
   position: fixed;
+  bottom: 0;
   display: flex;
   justify-content: center;
-  bottom: 0;
-  background-color: var(--frame_color);
+  background-color: #525148;
+  border: .4rem outset #68675c;
+  border-bottom-style: none;
   width: 50vw;
-  list-style-type: none;
-  border-radius: 1rem 1rem 0rem 0rem;
+  height: 4rem;
+}
+#navTabHolder {
+  display: flex;
+  justify-content: center;
+  border: .2rem inset #68675c;
+  margin: .5rem;
 }
 .navTabs {
-  background-color: var(--light_background);
+  --tab_color: #aa9f73;
+  --tab_border: #c4b16d;
+  font-family: "Libertinus Serif", sans-serif;
+  font-weight: 700;
+  line-height: normal;
+  color: #000000d0;
+  background-color: var(--tab_color);
+  border: .3rem outset var(--tab_border);
+  margin: 0;
   padding: .5rem;
 }
 .navTabs:hover {
-  background-color: var(--lighter_background);
+  background-color: lch(from var(--tab_color) calc(l + 10) c h);
+  border-color: lch(from var(--tab_border) calc(l + 10) c h);
+}
+.navTabs:active {
+  background-color: lch(from var(--tab_color) calc(l - 5) c h);
+  border-color: lch(from var(--tab_border) calc(l - 5) c h);
 }
 </style>
