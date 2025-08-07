@@ -23,6 +23,7 @@ function switchTab(num: number) {
   </div>
 
   <div id="navbar">
+    <img src="/src/assets/Valentine Coat of Arms Logo.svg" />
     <div id="navTabHolder">
       <p class="navTabs" @click="switchTab(0)">Home</p>
       <p class="navTabs" @click="switchTab(1)">Charts</p>
@@ -33,21 +34,27 @@ function switchTab(num: number) {
 <style lang="css" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
 #navbar {
+  --navbar_color: #525148;
   position: fixed;
   bottom: 0;
   display: flex;
   justify-content: center;
-  background-color: #525148;
+  background-color: var(--navbar_color);
   border: .4rem outset #68675c;
   border-bottom-style: none;
   width: 50vw;
   height: 4rem;
+
+  & img {
+    margin-right: auto;
+    padding: .40rem;
+  }
 }
 #navTabHolder {
   display: flex;
   justify-content: center;
   border: .2rem inset #68675c;
-  margin: .5rem;
+  margin: auto;
 }
 .navTabs {
   --tab_color: #aa9f73;
