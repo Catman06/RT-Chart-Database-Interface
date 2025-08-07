@@ -34,8 +34,10 @@ function switchTab(num: number) {
   display: flex;
   justify-content: center;
   bottom: 0;
+  background-color: var(--frame_color);
   width: 50vw;
   list-style-type: none;
+  border-radius: 1rem 1rem 0rem 0rem;
 }
 .navTabs {
   background-color: var(--light_background);

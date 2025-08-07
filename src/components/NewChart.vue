@@ -83,13 +83,13 @@ import { onMounted } from 'vue';
 		background-color: #1e201c;
 		border-color: inherit;
 		border-style: solid;
-		width: 90vw;
-		height: 90vh;
 		top: 1vh;
+		height: calc(90vh - 1rem);
 		display: flex;
 		flex-direction: column;
 		overflow: auto;
 		margin: auto;
+		filter:blur(0px);
 
 		&>form>div {
 			display: flex;
