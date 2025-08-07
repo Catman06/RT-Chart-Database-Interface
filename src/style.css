@@ -20,28 +20,14 @@
 
 body {
   margin: 0;
+}
+
+#app {
+  height: 100vh;
   display: flex;
   place-items: center;
   justify-content: center;
   align-content: center;
-  min-width: 100vw;
-  min-height: 100vh;
-  filter: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"> \
-    <filter id="glitch" x="0%" y="0%" width="100%" height="300%"> \
-        <feTurbulence type="fractal" seed="1" baseFrequency="0 0.001" result="NOISE" numOctaves=".1"> \
-          <animate attributeName="seed" values="1;1000;1" dur="500s" repeatCount="indefinite" /> \
-        </feTurbulence> \
-        <feOffset in="NOISE" dx="0" dy="10" result="OFFSET"> \
-          <animate attributeName="dy" values="0;-300" dur="10s" repeatCount="indefinite" /> \
-        </feOffset> \
-        <feDisplacementMap in="SourceGraphic" in2="OFFSET" scale="2.00005" xChannelSelector="R" yChannelSelector="A" /> \
-    </filter> \
-  </svg>#glitch');
-}
-
-#app {
-  text-align: center;
-  padding: 1rem;
 }
 
 button {
@@ -76,4 +62,20 @@ input:focus-visible {
 label {
   margin: 0rem 1rem 0rem 0rem;
   text-align: center;
+}
+
+#content {
+  height: 100vh;
+  align-content: center;
+  filter: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"> \
+  <filter id="glitch" x="0%" y="0%" width="100%" height="300%"> \
+      <feTurbulence type="fractal" seed="1" baseFrequency="0 0.001" result="NOISE" numOctaves=".1"> \
+        <animate attributeName="seed" values="1;1000;1" dur="500s" repeatCount="indefinite" /> \
+      </feTurbulence> \
+      <feOffset in="NOISE" dx="0" dy="10" result="OFFSET"> \
+        <animate attributeName="dy" values="0;-300" dur="10s" repeatCount="indefinite" /> \
+      </feOffset> \
+      <feDisplacementMap in="SourceGraphic" in2="OFFSET" scale="2.00005" xChannelSelector="R" yChannelSelector="A" /> \
+  </filter> \
+</svg>#glitch');
 }

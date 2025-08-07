@@ -85,11 +85,11 @@ import { onMounted } from 'vue';
 		border-style: solid;
 		width: 90vw;
 		height: 90vh;
-		top: 5vh;
-		left: 5vw;
+		top: 1vh;
 		display: flex;
 		flex-direction: column;
 		overflow: auto;
+		margin: auto;
 
 		&>form>div {
 			display: flex;
