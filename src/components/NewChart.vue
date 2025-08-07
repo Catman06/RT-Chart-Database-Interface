@@ -45,7 +45,7 @@ import { onMounted } from 'vue';
 				</div>
 				<div>
 					<label for="stability">Route Stability</label>
-					<input id="newStability" name="stability">
+					<input id="newStability" name="stability" required>
 				</div>
 			</div>
 			<div>
