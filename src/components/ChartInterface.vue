@@ -96,7 +96,9 @@ onMounted(async () => {
   <button type="button" v-if="showNewButton" @click="showNew = true">Make New Chart</button>
 
   <NewChart v-if="showNew" :start="startField?.value" :end="endField?.value" @closeModal="showNew = false; showNewButton = false"/>
-  <ChartDisplay v-for="chart in charts" :chartIn="chart" />
+  <div id="charts">
+    <ChartDisplay v-for="chart in charts" :chartIn="chart" />
+  </div>
 </template>
 
 <style scoped>
@@ -109,5 +111,9 @@ onMounted(async () => {
 
   .locationInput {
     margin: 0rem 2rem 0rem 2rem;
+  }
+
+  #charts {
+    padding-bottom: 5rem;
   }
 </style>
