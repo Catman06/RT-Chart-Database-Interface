@@ -23,7 +23,7 @@
 			<a href="Downloads/Koronus Expanse Printable.svg" download>
 				KORONUS EXPANSE MAP
 			</a>
-			 | USES FONTS "CELESTIA ANTIQUA" & "<a href="Downloads/REQUIEM-Inquisitor.otf" download>REQUIEM-INQUISITOR</a>"
+			 | USES FONTS "<a href="https://fonts.google.com/specimen/IM+Fell+English+SC?query=IM+fell">IM FELL ENGLISH SC</a>" & "<a href="Downloads/REQUIEM-Inquisitor.otf" download>REQUIEM-INQUISITOR</a>"
 		</p>
 		<a href="Downloads/Valentine Coat of Arms Logo.svg" download>
 			<p>VALENTINE LOGO</p>
