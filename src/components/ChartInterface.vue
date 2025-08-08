@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import ChartDisplay from '../components/ChartDisplay.vue';
-import NewChart from '../components/NewChart.vue';
+import ChartNew from './ChartNew.vue';
 
 const locations = ref();
 const options = ref();
@@ -95,7 +95,7 @@ onMounted(async () => {
   <button type="submit" form="locationInput">Get Charts</button>
   <button type="button" v-if="showNewButton" @click="showNew = true">Make New Chart</button>
 
-  <NewChart v-if="showNew" :start="startField?.value" :end="endField?.value" @closeModal="showNew = false; showNewButton = false"/>
+  <ChartNew v-if="showNew" :start="startField?.value" :end="endField?.value" @closeModal="showNew = false; showNewButton = false"/>
   <div id="charts">
     <ChartDisplay v-for="chart in charts" :chartIn="chart" />
   </div>
