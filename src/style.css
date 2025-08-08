@@ -49,7 +49,6 @@ input {
   color: inherit;
   font: inherit;
   background-color: var(--light_background);
-  caret-shape: block;
   border-color: inherit;
   border-style: solid;
   width: 95%;

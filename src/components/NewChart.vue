@@ -98,6 +98,7 @@ import { onMounted } from 'vue';
 
 			&>div {
 				width: 100%;
+				align-self: end;
 			}
 		}
 
