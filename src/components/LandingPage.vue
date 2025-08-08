@@ -4,6 +4,7 @@
 
 <template>
 	<div id="loginText">
+		<p>// IDENTITY VERIFIED</p>
 		<p>// WELCOME, AGENT OF THE GLORIOUS VALENTINE DYNASTY</p>
 	</div>
 	<img src="/src/assets/Heraldry Valentine Greenscale.png"></img>
@@ -14,12 +15,5 @@ img {
 	padding: 2rem;
 	max-height: 80vh;
 	max-width: 75vw;
-}
-#loginText {
-	text-align: left;
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100vh;
 }
 </style>

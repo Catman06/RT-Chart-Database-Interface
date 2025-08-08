@@ -76,6 +76,10 @@ onMounted(async () => {
 </script>
 
 <template>
+  <div id="loginText">
+		<p>// IDENTITY VERIFIED</p>
+		<p>// CHARTS ACCESS GRANTED</p>
+  </div>
   <form id="locationInput">
     <div class="locationInput">
       <label for=start>Starting Location</label>

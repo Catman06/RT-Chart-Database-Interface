@@ -2,6 +2,7 @@
 import { onMounted, ref, type Ref } from 'vue';
 import ChartInterface from './components/ChartInterface.vue';
 import LandingPage from './components/LandingPage.vue';
+import ArchivePage from './components/ArchivePage.vue';
 
 onMounted(async () => {
   // Hide the praise of the machine god once the page fully loads
@@ -29,6 +30,7 @@ function switchTab(num: number) {
   <div id="content">
     <LandingPage v-if="tab == 0" />
     <ChartInterface v-else-if="tab == 1" />
+    <ArchivePage v-else-if="tab == 2" />
   </div>
 
   <div id="navbar">
@@ -36,6 +38,7 @@ function switchTab(num: number) {
     <div id="navTabHolder">
       <p class="navTabs" @click="switchTab(0)">Home</p>
       <p class="navTabs" @click="switchTab(1)">Charts</p>
+      <p class="navTabs" @click="switchTab(2)">Archive</p>
     </div>
   </div>
 </template>
