@@ -54,7 +54,7 @@ function switchTab(num: number) {
   background-color: var(--navbar_color);
   border: .4rem outset #68675c;
   border-bottom-style: none;
-  width: 80vw;
+  width: calc(100% - .8rem);
   height: 4rem;
 
   & img {
