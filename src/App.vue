@@ -10,9 +10,18 @@ onMounted(async () => {
 })
 
 const tab: Ref<number, number> = ref(0);
+const tabs: HTMLCollectionOf<Element> = document.getElementsByClassName("navTabs")
 
 function switchTab(num: number) {
   tab.value = num;
+  for (let index = 0; index < tabs.length; index++) {
+    const tab = tabs[index];
+    if (index == num) {
+      tab.classList.add("pressed");
+    } else {
+      tab.classList.remove("pressed");
+    }
+  }
 }
 </script>
 
@@ -67,13 +76,18 @@ function switchTab(num: number) {
   border: .3rem outset var(--tab_border);
   margin: 0;
   padding: .5rem;
+  cursor: pointer;
 }
 .navTabs:hover {
   background-color: lch(from var(--tab_color) calc(l + 10) c h);
-  border-color: lch(from var(--tab_border) calc(l + 10) c h);
+  border-color: lch(from var(--tab_border) calc(l + 5) c h);
 }
 .navTabs:active {
-  background-color: lch(from var(--tab_color) calc(l - 5) c h);
-  border-color: lch(from var(--tab_border) calc(l - 5) c h);
+  background-color: lch(from var(--tab_color) calc(l - 15) c h);
+  border-color: lch(from var(--tab_border) calc(l - 20) c h);
+}
+.navTabs.pressed {
+  background-color: lch(from var(--tab_color) calc(l - 10) c h);
+  border-color: lch(from var(--tab_border) calc(l - 15) c h);
 }
 </style>
