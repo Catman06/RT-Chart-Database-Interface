@@ -12,8 +12,8 @@
 
 <style lang="css" scoped>
 img {
-	padding: 2rem;
-	max-height: 80vh;
+	max-height: calc(90vh - 7rem);
+	margin-top: 4rem;
 	max-width: 75vw;
 }
 </style>

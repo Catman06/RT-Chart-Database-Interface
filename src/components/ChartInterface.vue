@@ -112,6 +112,7 @@ onMounted(async () => {
     align-items: center;
     height: 3rem;
     padding: 1rem;
+    margin-top: 4rem;
   }
 
   .locationInput {
@@ -119,6 +120,6 @@ onMounted(async () => {
   }
 
   #charts {
-    padding-bottom: 5rem;
+    margin-bottom: 1rem;
   }
 </style>

@@ -50,6 +50,7 @@
 	text-align: left;
 	line-height: 1;
 	padding: 1rem;
+	margin-top: 4rem;
 
 	& a {
 		color: lch(from var(--line_color) calc(l + 30) calc(c - 10) h);
