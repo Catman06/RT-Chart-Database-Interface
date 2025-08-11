@@ -81,7 +81,9 @@ export class Planet {
 	habitability?: string;
 	// Any landmasses the planet has
 	landmasses: Landmass[] = [];
-
+	// Further notes on the planet
+	info?: string;
+	
 	constructor() {}
 }
 

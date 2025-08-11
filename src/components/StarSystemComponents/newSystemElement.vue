@@ -2,11 +2,13 @@
 import { ref, type PropType, type Ref } from 'vue';
 import { Resource, SystemElement } from '../../StarSystem';
 import NewResource from './newResource.vue';
+import NewPlanet from './newPlanet.vue';
 
 const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, required: true});
 
-const resourceModalOpen = ref(false);
-const resourceKeys: Ref<number[]> = ref([]);
+	const resourceModalOpen = ref(false);
+	const resourceKeys: Ref<number[]> = ref([]);
+	const planetModalOpen = ref(false);
 
 function addResource() {
 	let index = resourceKeys.value.length;
@@ -42,11 +44,11 @@ function deleteResource(resourceKey: number) {
 		<button type="button" @click="resourceModalOpen = true">Resources</button>
 	</div>
 	<div>
-		<button type="button">Planet</button>
+		<button type="button" @click="planetModalOpen = true">Planet</button>
 		
 	</div>
 </div>
-<div id="resourceModal" v-if="resourceModalOpen">
+<div class="modal" v-if="resourceModalOpen">
 	<div class="content">
 		<button class="closeButton" type="button" @click="resourceModalOpen = false">X</button>
 		<label>Resource Modal for {{  element.name }}</label>
@@ -61,6 +63,12 @@ function deleteResource(resourceKey: number) {
 		<button type="button" @click="addResource">Add Resource</button>
 	</div>
 </div>
+<div class="modal" v-if="planetModalOpen">
+	<div class="content">
+		<button class="closeButton" type="button" @click="planetModalOpen = false">X</button>
+		<NewPlanet v-model="element" />
+	</div>
+</div>
 </template>
 
 <style lang="css" scoped>
@@ -72,7 +80,7 @@ textarea {
 		z-index: 10;
 }
 
-#resourceModal {
+.modal {
 	z-index: 20;
 	position: fixed;
 	top: 0;
@@ -99,12 +107,13 @@ textarea {
 	left: 2.5%;
 	margin: 0;
 }
-  #resources {
-	width: 90%;
-	margin: auto;
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
+
+#resources {
+width: 90%;
+margin: auto;
+display: flex;
+align-items: center;
+flex-wrap: wrap;
 
 	& .resource {
 		margin: auto;
