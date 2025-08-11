@@ -55,7 +55,7 @@ export class Resource {
 	// Further info about the resource and its exploitation
 	info?: string;
 
-	constructor(type: string, quantity: number, exploited: boolean, info?: string) {
+	constructor(type?: string, quantity?: number, exploited?: boolean, info?: string) {
 		this.type = type;
 		this.quantity = quantity;
 		this.exploited = exploited;

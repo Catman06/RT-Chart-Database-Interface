@@ -1,15 +1,28 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
-import { SystemElement } from '../../StarSystem';
+import { Resource } from '../../StarSystem';
 
-defineEmits(['closeResourceModal'])
-
-// const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, required: true});
+const resource = defineModel({ type: [Resource] as PropType<Resource>, required: true});
 </script>
 
 <template>
 	<div>
-		<p>test Text</p>
+		<div>
+			<label for="resourceType">Type</label>
+			<input name="resourceType" v-model="resource.type">
+		</div>
+		<div>
+			<label for="resourceQuantity">Quantity</label>
+			<input name="resourceQuantity" type="number" v-model="resource.quantity">
+		</div>
+		<div>
+			<label for="resourceExploited">Exploited</label>
+			<input name="resourceExploited" type="checkbox" v-model="resource.exploited">
+		</div>
+		<div>
+			<label for="resourceInfo">Resource Info</label>
+			<textarea name="resourceInfo" v-model="resource.info" />
+		</div>
 	</div>
 </template>
 

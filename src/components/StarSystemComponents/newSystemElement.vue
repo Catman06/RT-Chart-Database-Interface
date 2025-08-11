@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, type PropType, type Ref } from 'vue';
-import { SystemElement } from '../../StarSystem';
+import { Resource, SystemElement } from '../../StarSystem';
 import NewResource from './newResource.vue';
 
 const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, required: true});
@@ -8,6 +8,20 @@ const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, 
 const resourceModalOpen = ref(false);
 const resourceKeys: Ref<number[]> = ref([]);
 
+function addResource() {
+	let index = resourceKeys.value.length;
+	while (resourceKeys.value.includes(index)) { index++ };
+	element.value.resources[element.value.resources.length] = new Resource;
+	resourceKeys.value.push(index);
+}
+function getResourceIndex(resourceKey: number) {
+	return resourceKeys.value.indexOf(resourceKey);
+}
+function deleteResource(resourceKey: number) {
+	let index = getResourceIndex(resourceKey);
+	element.value.resources.splice(index, 1);
+	resourceKeys.value.splice(index, 1);
+}
 </script>
 
 <template>
@@ -37,10 +51,14 @@ const resourceKeys: Ref<number[]> = ref([]);
 		<button class="closeButton" type="button" @click="resourceModalOpen = false">X</button>
 		<label>Resource Modal for {{  element.name }}</label>
 		<div id="resources">
-			<template v-for="resource in element.resources">
-				<NewResource />
+			<template v-for="resourceKey in resourceKeys" :key="resourceKey" >
+				<div class="resource">
+					<NewResource v-model="element.resources[getResourceIndex(resourceKey)]" />
+					<button type="button" @click="deleteResource(resourceKey)">X</button>
+				</div>
 			</template>
 		</div>
+		<button type="button" @click="addResource">Add Resource</button>
 	</div>
 </div>
 </template>
@@ -51,9 +69,11 @@ textarea {
 		width: 90%;
 		height: 5rem;
 		margin: auto;
+		z-index: 10;
 }
 
 #resourceModal {
+	z-index: 20;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -78,5 +98,20 @@ textarea {
 	top: 2.5%;
 	left: 2.5%;
 	margin: 0;
+}
+  #resources {
+	width: 90%;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+
+	& .resource {
+		margin: auto;
+		width: 50%;
+		&>* {
+			margin: auto;
+		}
+	}
 }
 </style>

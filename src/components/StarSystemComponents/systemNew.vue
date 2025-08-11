@@ -3,33 +3,40 @@ import { ref, type Ref } from 'vue';
 import SystemNewElement from './newSystemElement.vue';
 import { Star, StarSystem, SystemElement } from '../../StarSystem';
 
+const System = ref(new StarSystem);
 const starKeys: Ref<number[]> = ref([]);
 const elementKeys: Ref<number[]> = ref([]);
 
-const System = ref(new StarSystem);
+// Setup keys if a populated System is given UNTESTED
+for (let i = 0; i < System.value.stars.length; i++) {
+	addStar();
+}
+for (let i = 0; i < System.value.elements.length; i++) {
+	addElement();
+}
 
-function addStar(_event: Event) {
+function addStar() {
 	let index = starKeys.value.length;
 	while (starKeys.value.includes(index)) { index++ };
 	System.value.stars[System.value.stars.length] = new Star;
 	starKeys.value.push(index);
 }
-function getStarIndex(keyIndex: number) {
-	return starKeys.value.indexOf(keyIndex);
+function getStarIndex(starKey: number) {
+	return starKeys.value.indexOf(starKey);
 }
 function deleteStar(starKey: number) {
 	let index = getStarIndex(starKey);
 	System.value.stars.splice(index, 1);
 	starKeys.value.splice(index, 1);
 }
-function addElement(_event: Event) {
+function addElement() {
 	let index = elementKeys.value.length;
 	while (elementKeys.value.includes(index)) { index++ };
 	System.value.elements[System.value.elements.length] = new SystemElement;
 	elementKeys.value.push(index);
 }
-function getElementIndex(keyIndex: number) {
-	return elementKeys.value.indexOf(keyIndex);
+function getElementIndex(elementKey: number) {
+	return elementKeys.value.indexOf(elementKey);
 }
 function deleteElement(elementKey: number) {
 	let index = getElementIndex(elementKey);
@@ -51,7 +58,7 @@ function deleteElement(elementKey: number) {
 		</div>
 		<label>System Stars</label>
 		<div id="stars">
-			<template v-for="starKey in starKeys" :key="starIndex">
+			<template v-for="starKey in starKeys" :key="starKey">
 				<div class="star">
 					<label :for="'starName' + starKey">Name</label>
 					<input :name="'starName' + starKey" v-model="System.stars[getStarIndex(starKey)].name">
@@ -64,9 +71,9 @@ function deleteElement(elementKey: number) {
 		<button type="button" @click="addStar">Add Star</button>
 		<label>System Elements</label>
 		<div id="elements">
-			<template v-for="elementKey in elementKeys" :name="elementIndex" :key="elementIndex">
+			<template v-for="elementKey in elementKeys" :key="elementKey">
 				<div class="element">
-					<SystemNewElement  :index="elementKey" v-model="System.elements[getElementIndex(elementKey)]" />
+					<SystemNewElement v-model="System.elements[getElementIndex(elementKey)]" />
 					<button type="button" @click="deleteElement(elementKey)">X</button>
 				</div>
 			</template>
@@ -75,7 +82,7 @@ function deleteElement(elementKey: number) {
 	</form>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
 #newSystemForm {
 	&>* {
 		display: block;
