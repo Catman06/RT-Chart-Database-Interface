@@ -6,9 +6,9 @@ import NewPlanet from './newPlanet.vue';
 
 const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, required: true});
 
-	const resourceModalOpen = ref(false);
-	const resourceKeys: Ref<number[]> = ref([]);
-	const planetModalOpen = ref(false);
+const resourceModalOpen = ref(false);
+const resourceKeys: Ref<number[]> = ref([]);
+const planetModalOpen = ref(false);
 
 function addResource() {
 	let index = resourceKeys.value.length;

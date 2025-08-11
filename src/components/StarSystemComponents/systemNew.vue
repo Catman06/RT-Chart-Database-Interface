@@ -38,7 +38,11 @@ function addElement() {
 function getElementIndex(elementKey: number) {
 	return elementKeys.value.indexOf(elementKey);
 }
-function deleteElement(elementKey: number) {
+
+// Handle deleting elements
+// When close is clicked, dialogElementKey is set, and the dialog is shown
+const dialogElementKey: Ref<number | undefined> = ref();
+async function deleteElement(elementKey: number) {
 	let index = getElementIndex(elementKey);
 	System.value.elements.splice(index, 1);
 	elementKeys.value.splice(index, 1);
@@ -74,12 +78,19 @@ function deleteElement(elementKey: number) {
 			<template v-for="elementKey in elementKeys" :key="elementKey">
 				<div class="element">
 					<SystemNewElement v-model="System.elements[getElementIndex(elementKey)]" />
-					<button type="button" @click="deleteElement(elementKey)">X</button>
+					<button type="button" @click="dialogElementKey = elementKey">X</button>
 				</div>
 			</template>
 		</div>
 		<button type="button" @click="addElement">Add Element</button>
 	</form>
+	<div class="confirmDialog" v-if="dialogElementKey != undefined">
+		<div class="dialogContent">
+			<p>Do you really want to delete {{  System.elements[getElementIndex(dialogElementKey)].name ? System.elements[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</p>
+			<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
+			<button @click="dialogElementKey = undefined">No</button>
+		</div>
+	</div>
 </template>
 
 <style lang="css">
@@ -119,6 +130,24 @@ function deleteElement(elementKey: number) {
 				margin: auto;
 			}
 		}
+	}
+}
+
+.confirmDialog {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #10101080;
+
+	& .dialogContent {
+		background-color: var(--light_background);
+		border: 2px solid var(--line_color);
+		padding: 1rem;
 	}
 }
 </style>
