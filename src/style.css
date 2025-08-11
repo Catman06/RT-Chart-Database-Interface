@@ -72,6 +72,11 @@ label {
   text-align: center;
 }
 
+textarea {
+	filter: blur(0px);
+  overflow: auto;
+}
+
 #content {
   position: fixed;
   top: 0;

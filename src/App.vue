@@ -3,6 +3,7 @@ import { onMounted, ref, type Ref } from 'vue';
 import ChartInterface from './components/ChartInterface.vue';
 import LandingPage from './components/LandingPage.vue';
 import ArchivePage from './components/ArchivePage.vue';
+import StarSystemInterface from './components/StarSystemInterface.vue';
 
 onMounted(async () => {
   // Hide the praise of the machine god once the page fully loads
@@ -31,6 +32,7 @@ function switchTab(num: number) {
     <LandingPage v-if="tab == 0" />
     <ChartInterface v-else-if="tab == 1" />
     <ArchivePage v-else-if="tab == 2" />
+    <StarSystemInterface v-else-if="tab == 3" />
   </div>
 
   <div id="navbar">
@@ -39,6 +41,7 @@ function switchTab(num: number) {
       <p class="navTabs" @click="switchTab(0)">Home</p>
       <p class="navTabs" @click="switchTab(1)">Charts</p>
       <p class="navTabs" @click="switchTab(2)">Archive</p>
+      <p class="navTabs" @click="switchTab(3)">Systems</p>
     </div>
   </div>
 </template>
