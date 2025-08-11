@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, type PropType, type Ref } from 'vue';
-import { Resource, SystemElement } from '../../StarSystem';
+import { Planet, Resource, SystemElement } from '../../StarSystem';
 import NewResource from './newResource.vue';
 import NewPlanet from './newPlanet.vue';
 
@@ -24,6 +24,13 @@ function deleteResource(resourceKey: number) {
 	element.value.resources.splice(index, 1);
 	resourceKeys.value.splice(index, 1);
 }
+
+function getPlanet(): Ref<Planet> {
+	if (!element.value.planet) {
+		element.value.planet = new Planet;
+	}
+	return ref(element.value.planet);
+}
 </script>
 
 <template>
@@ -40,13 +47,9 @@ function deleteResource(resourceKey: number) {
 		<label for="elementInfo">Element Info</label>
 		<textarea name="elementInfo" v-model="element.info" />
 	</div>
-	<div>
-		<button type="button" @click="resourceModalOpen = true">Resources</button>
-	</div>
-	<div>
-		<button type="button" @click="planetModalOpen = true">Planet</button>
-		
-	</div>
+	<button type="button" @click="resourceModalOpen = true">Resources</button>
+	<!-- Planet button only appears when element.type is "planet" or "moon" (Case insensitive) -->
+	<button type="button" @click="planetModalOpen = true" v-if="element.type?.match(/^(planet|moon)$/i)">Planet</button>
 </div>
 <div class="modal" v-if="resourceModalOpen">
 	<div class="content">
@@ -66,6 +69,7 @@ function deleteResource(resourceKey: number) {
 <div class="modal" v-if="planetModalOpen">
 	<div class="content">
 		<button class="closeButton" type="button" @click="planetModalOpen = false">X</button>
+		<p>Planet Modal for {{  element.name  }}</p>
 		<NewPlanet v-model="element" />
 	</div>
 </div>

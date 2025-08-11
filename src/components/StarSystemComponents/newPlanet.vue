@@ -3,17 +3,11 @@ import { ref, type PropType } from 'vue';
 import { Planet, SystemElement } from '../../StarSystem';
 
 const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, required: true});
-const planet = element.value.planet ? element.value.planet : new Planet;
-
-const isPlanet = ref(false);
+const planet = ref(element.value.planet ? element.value.planet : element.value.planet = new Planet);
 </script>
 
 <template>
 	<div>
-		<label>Is this a planet?</label>
-		<input id="isPlanet" name="isPlanet" type="checkbox" v-model="isPlanet">
-	</div>
-	<div v-show="isPlanet">
 		<div>
 			<label for="planetBody">Body</label>
 			<input name="planetBody" v-model="planet.body">
