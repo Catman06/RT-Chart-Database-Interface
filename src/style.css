@@ -7,7 +7,7 @@
 
   color-scheme: light dark;
   color: var(--line_color);
-  background-color: #171d19;
+  background-color: var(--background_color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,6 +15,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   --line_color: rgb(147, 248, 178);
+  --background_color: #171d19;
   --light_background: #1a241d;
   --lighter_background: #2c3d31;
   --frame_color: #998653;

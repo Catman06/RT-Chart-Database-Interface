@@ -203,8 +203,8 @@ async function deleteElement(elementKey: number) {
 
 .closeButton {
 	position: absolute;
-	top: 2.5%;
-	left: 2.5%;
+	top: 0;
+	left: 0;
 	margin: 0;
 }
 

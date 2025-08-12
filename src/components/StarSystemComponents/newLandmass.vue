@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, type PropType, type Ref } from 'vue';
 import { Landmass, Territory } from '../../StarSystem';
+import NewTerritory from './newTerritory.vue';
 
 const landmass = defineModel({ type: [Landmass] as PropType<Landmass>, required: true});
 
@@ -44,9 +45,9 @@ function deleteTerritory(territoryKey: number) {
 		<div class="content">
 			<button class="closeButton" type="button" @click="territoriesModalOpen = false">X</button>
 			<label class="bold big">Territories Modal for {{  landmass.name ? landmass.name : "Landmass" }}</label>
-			<div id="territorys">
+			<div class="subObjectHolder">
 				<template v-for="territoryKey in territoryKeys" :key="territoryKey" >
-					<div class="territory">
+					<div class="subObject">
 						<NewTerritory v-model="landmass.territories[getTerritoryIndex(territoryKey)]" />
 						<button type="button" @click="dialogTerritoryKey = territoryKey">X</button>
 					</div>
