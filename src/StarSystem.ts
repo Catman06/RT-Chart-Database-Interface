@@ -90,5 +90,23 @@ export class Planet {
 }
 
 export class Landmass {
-	// TODO
+	// Name of the landmass
+	name?: string;
+	// Any additional info on the landmass itself
+	info?: string;
+	// Array on territories on the landmass
+	territories: Territories[] = [];
+}
+
+export class Territories {
+	// Name of the territory
+	name?: string;
+	// Base terrain of the territory
+	terrain?: string;
+	// Traits of the territory
+	traits: string[] = [];
+	// Landmarks of the territory
+	landmarks: string[] = [];
+	// Any additional info on the territory
+	info?: string;
 }
