@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, type PropType, type Ref } from 'vue';
-import { Planet, Resource, SystemElement } from '../../StarSystem';
+import { Resource, SystemElement } from '../../StarSystem';
 import NewResource from './newResource.vue';
 import NewPlanet from './newPlanet.vue';
 
@@ -23,13 +23,6 @@ function deleteResource(resourceKey: number) {
 	let index = getResourceIndex(resourceKey);
 	element.value.resources.splice(index, 1);
 	resourceKeys.value.splice(index, 1);
-}
-
-function getPlanet(): Ref<Planet> {
-	if (!element.value.planet) {
-		element.value.planet = new Planet;
-	}
-	return ref(element.value.planet);
 }
 </script>
 
@@ -75,7 +68,7 @@ function getPlanet(): Ref<Planet> {
 </div>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
 textarea {
 		display: block;
 		width: 90%;
@@ -97,12 +90,14 @@ textarea {
 	justify-items: center;
 }
 
-.content {
+.modal>.content {
 	background-color: var(--light_background);
 	border: 2px solid var(--line_color);
 	width: 95%;
 	height: 95%;
 	margin: auto;
+	overflow: auto;
+	filter:blur(0px);
 }
 
 .closeButton {

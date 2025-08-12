@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, type Ref } from 'vue';
-import SystemNewElement from './newSystemElement.vue';
+import NewSystemElement from './newSystemElement.vue';
 import { Star, StarSystem, SystemElement } from '../../StarSystem';
 
 const System = ref(new StarSystem);
@@ -77,7 +77,7 @@ async function deleteElement(elementKey: number) {
 		<div id="elements">
 			<template v-for="elementKey in elementKeys" :key="elementKey">
 				<div class="element">
-					<SystemNewElement v-model="System.elements[getElementIndex(elementKey)]" />
+					<NewSystemElement v-model="System.elements[getElementIndex(elementKey)]" />
 					<button type="button" @click="dialogElementKey = elementKey">X</button>
 				</div>
 			</template>
