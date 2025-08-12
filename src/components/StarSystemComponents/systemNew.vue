@@ -48,22 +48,30 @@ async function deleteElement(elementKey: number) {
 	elementKeys.value.splice(index, 1);
 }
 
-async function saveSystem() {
-	await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
-			method: "POST",
-			body: JSON.stringify(System.value),
-		})
+// Validate and, if valid, save the entered system to the database
+async function saveSystem(event: Event) {
+	event.preventDefault();
+	console.log("Further validating system")
+
+	// 
+
+
+	console.log("Saving system");
+	// await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
+	// 		method: "POST",
+	// 		body: JSON.stringify(System.value),
+	// 	})
 }
 </script>
 
 <template>
 	<button @click="() => console.log(System)">Print</button>
-	<button @click="saveSystem()">Save</button>
-	<form id="newSystemForm">
+	<button form="newSystemForm">Save</button>
+	<form id="newSystemForm" @submit="saveSystem">
 		<label class="bold big">System</label>
 		<div>
 			<label for="systemName">System Name</label>
-			<input name="systemName" v-model="System.name">
+			<input name="systemName" v-model="System.name" required>
 		</div>
 		<div>
 			<label for="systemInfo">System Info</label>
@@ -75,7 +83,7 @@ async function saveSystem() {
 				<div class="star">
 					<div>
 						<label :for="'starName' + starKey">Name</label>
-						<input :name="'starName' + starKey" v-model="System.stars[getStarIndex(starKey)].name">
+						<input :name="'starName' + starKey" v-model="System.stars[getStarIndex(starKey)].name" required>
 						<label :for="'starType' + starKey">Type</label>
 						<input :name="'starType' + starKey" v-model="System.stars[getStarIndex(starKey)].type">
 						<button type="button" @click="deleteStar(starKey)">X</button>

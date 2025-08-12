@@ -9,11 +9,11 @@ const resource = defineModel({ type: [Resource] as PropType<Resource>, required:
 	<div>
 		<div>
 			<label for="resourceType">Type</label>
-			<input name="resourceType" v-model="resource.type">
+			<input name="resourceType" v-model="resource.type" required>
 		</div>
 		<div>
 			<label for="resourceQuantity">Quantity</label>
-			<input name="resourceQuantity" type="number" v-model="resource.quantity">
+			<input name="resourceQuantity" type="number" v-model="resource.quantity" required>
 		</div>
 		<div>
 			<label for="resourceExploited">Exploited</label>

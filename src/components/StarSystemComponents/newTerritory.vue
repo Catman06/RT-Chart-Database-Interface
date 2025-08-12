@@ -64,7 +64,7 @@ function deleteLandmark(landmarkKey: number) {
 			<div class="trait">
 				<div>
 					<label :for="'trait' + traitKey">Trait</label>
-					<input :name="'trait' + traitKey" v-model="territory.traits[getTraitIndex(traitKey)]">
+					<input :name="'trait' + traitKey" v-model="territory.traits[getTraitIndex(traitKey)]" required>
 				</div>
 				<div class="traitInfo">
 					<label :for="'traitInfo' + traitKey">Info</label>
@@ -80,7 +80,7 @@ function deleteLandmark(landmarkKey: number) {
 			<div class="landmark">
 				<div>
 					<label :for="'landmark' + landmarkKey">Landmark</label>
-					<input :name="'landmark' + landmarkKey" v-model="territory.landmarks[getLandmarkIndex(landmarkKey)]">
+					<input :name="'landmark' + landmarkKey" v-model="territory.landmarks[getLandmarkIndex(landmarkKey)]" required>
 				</div>
 				<div class="landmarkInfo">
 					<label :for="'landmarkInfo' + landmarkKey">Info</label>

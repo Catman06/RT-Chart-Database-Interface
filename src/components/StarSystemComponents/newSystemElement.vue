@@ -37,11 +37,11 @@ function deleteResource(resourceKey: number) {
 	</div>
 	<div>
 		<label for="elementZone">Solar Zone</label>
-		<input name="elementZone" v-model="element.zone">
+		<input name="elementZone" v-model="element.zone" required>
 	</div>
 	<div>
 		<label for="elementType">Type</label>
-		<input name="elementType" v-model="element.type">
+		<input name="elementType" v-model="element.type" required>
 	</div>
 	<div>
 		<label for="elementInfo">Info</label>
