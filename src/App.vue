@@ -28,11 +28,13 @@ function switchTab(num: number) {
 </script>
 
 <template>
-  <div id="content">
-    <LandingPage v-if="tab == 0" />
-    <ChartInterface v-else-if="tab == 1" />
-    <ArchivePage v-else-if="tab == 2" />
-    <StarSystemInterface v-else-if="tab == 3" />
+  <div id="filter">
+    <div id="content">
+      <LandingPage v-if="tab == 0" />
+      <ChartInterface v-else-if="tab == 1" />
+      <ArchivePage v-else-if="tab == 2" />
+      <StarSystemInterface v-else-if="tab == 3" />
+    </div>
   </div>
 
   <div id="navbar">

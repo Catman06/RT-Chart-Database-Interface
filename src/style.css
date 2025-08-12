@@ -83,14 +83,13 @@ textarea {
   border: 2px solid var(--line_color);
 }
 
-#content {
+#filter {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 4.4rem);
   align-content: center;
-  overflow: auto;
   filter: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"> \
   <filter id="glitch" x="0%" y="0%" width="100%" height="300%"> \
       <feTurbulence type="fractal" seed="1" baseFrequency="0 0.001" result="NOISE" numOctaves=".1"> \
@@ -102,4 +101,9 @@ textarea {
       <feDisplacementMap in="SourceGraphic" in2="OFFSET" scale="2.00005" xChannelSelector="R" yChannelSelector="A" /> \
   </filter> \
 </svg>#glitch');
+}
+
+#content {
+  overflow: auto;
+  height: calc(100vh - 4.4rem);
 }

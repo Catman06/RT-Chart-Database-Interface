@@ -100,7 +100,7 @@ async function saveSystem() {
 		</div>
 		<button type="button" class="addButton" @click="addElement">Add Element</button>
 	</form>
-	<Teleport to="body">
+	<Teleport to="#content">
 		<div class="confirmDialog" v-if="dialogElementKey != undefined">
 			<div class="dialogContent">
 				<p>Do you really want to delete {{  System.elements[getElementIndex(dialogElementKey)].name ? System.elements[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</p>
@@ -193,7 +193,7 @@ async function saveSystem() {
 	left: 0;
 	background-color: #10101050;
 	width: 100%;
-	height: calc(100% - 4.4rem);
+	height: 100%;
 	display: flex;
 	align-items: center;	
 	justify-items: center;

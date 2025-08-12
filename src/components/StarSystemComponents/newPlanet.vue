@@ -102,7 +102,7 @@ async function deleteLandmass(landmassKey: number) {
 	</template>
 </div>
 <button type="button" @click="addLandmass">Add Landmass</button>
-<Teleport to="body">
+<Teleport to="#content">
 	<div class="confirmDialog" v-if="dialogElementKey != undefined">
 		<div class="dialogContent">
 			<label class="bold">Do you really want to delete {{  planet.orbitalFeatures[getElementIndex(dialogElementKey)].name ? planet.orbitalFeatures[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</label>
@@ -111,7 +111,7 @@ async function deleteLandmass(landmassKey: number) {
 		</div>
 	</div>
 </Teleport>
-<Teleport to="body">
+<Teleport to="#content">
 	<div class="confirmDialog" v-if="dialogLandmassKey != undefined">
 		<div class="dialogContent">
 			<label class="bold">Do you really want to delete {{  planet.landmasses[getLandmassIndex(dialogLandmassKey)].name ? planet.landmasses[getLandmassIndex(dialogLandmassKey)].name : "unnamed landmass" }}?</label>

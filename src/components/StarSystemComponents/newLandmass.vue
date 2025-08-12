@@ -40,7 +40,7 @@ function deleteTerritory(territoryKey: number) {
 	</div>
 	<button type="button" @click="territoriesModalOpen = true">Territories</button>
 </div>
-<Teleport to="body">
+<Teleport to="#content">
 	<div class="modal" v-if="territoriesModalOpen">
 		<div class="content">
 			<button class="closeButton" type="button" @click="territoriesModalOpen = false">X</button>
@@ -57,7 +57,7 @@ function deleteTerritory(territoryKey: number) {
 		</div>
 	</div>
 </Teleport>
-<Teleport to="body">
+<Teleport to="#content">
 	<div class="confirmDialog" v-if="dialogTerritoryKey != undefined">
 		<div class="dialogContent">
 			<label class="bold">Do you really want to delete {{  landmass.territories[getTerritoryIndex(dialogTerritoryKey)].name ? landmass.territories[getTerritoryIndex(dialogTerritoryKey)].name : "unnamed territory" }}?</label>

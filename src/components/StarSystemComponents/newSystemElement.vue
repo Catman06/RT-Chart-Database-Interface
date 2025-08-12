@@ -51,7 +51,7 @@ function deleteResource(resourceKey: number) {
 	<!-- Planet button only appears when element.type is "planet" or "moon" (Case insensitive) -->
 	<button type="button" @click="planetModalOpen = true" v-if="element.type?.match(/^(planet|moon)$/i)">Planet</button>
 </div>
-<Teleport to="body">
+<Teleport to="#content">
 	<div class="modal" v-if="resourceModalOpen">
 		<div class="content">
 			<button class="closeButton" type="button" @click="resourceModalOpen = false">X</button>
@@ -68,7 +68,7 @@ function deleteResource(resourceKey: number) {
 		</div>
 	</div>
 </Teleport>
-<Teleport to="body">
+<Teleport to="#content">
 	<div class="modal" v-if="planetModalOpen">
 		<div class="content">
 			<button class="closeButton" type="button" @click="planetModalOpen = false">X</button>
