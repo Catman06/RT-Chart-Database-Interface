@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { ref, type PropType, type Ref } from 'vue';
-import { Planet, SystemElement } from '../../StarSystem';
+import { Landmass, Planet, SystemElement } from '../../StarSystem';
 import NewSystemElement from './newSystemElement.vue';
+import NewLandmass from './newLandmass.vue';
 
 const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, required: true});
 const planet = ref(element.value.planet ? element.value.planet : element.value.planet = new Planet);
@@ -28,6 +29,29 @@ async function deleteElement(elementKey: number) {
 	let index = getElementIndex(elementKey);
 	planet.value.orbitalFeatures.splice(index, 1);
 	elementKeys.value.splice(index, 1);
+}
+
+const landmassKeys: Ref<number[]> = ref([]);
+for (let i = 0; i < planet.value.landmasses.length; i++) {
+	addLandmass();
+}
+function addLandmass() {
+	let index = landmassKeys.value.length;
+	while (landmassKeys.value.includes(index)) { index++ };
+	planet.value.landmasses[planet.value.landmasses.length] = new Landmass;
+	landmassKeys.value.push(index);
+}
+function getLandmassIndex(landmassKey: number) {
+	return landmassKeys.value.indexOf(landmassKey);
+}
+
+// Handle deleting landmasses
+// When close is clicked, dialogLandmassKey is set, and the dialog is shown
+const dialogLandmassKey: Ref<number | undefined> = ref();
+async function deleteLandmass(landmassKey: number) {
+	let index = getLandmassIndex(landmassKey);
+	planet.value.landmasses.splice(index, 1);
+	landmassKeys.value.splice(index, 1);
 }
 </script>
 
@@ -58,22 +82,41 @@ async function deleteElement(elementKey: number) {
 		<input name="planetHabitability" v-model="planet.habitability">
 	</div>
 </div>
-<label class="bold big">System Elements</label>
-<div id="elements">
+<label class="bold big">Orbital Features</label>
+<div class="subObjectHolder">
 	<template v-for="elementKey in elementKeys" :key="elementKey">
-		<div class="element">
+		<div class="subObject">
 			<NewSystemElement v-model="planet.orbitalFeatures[getElementIndex(elementKey)]" />
 			<button type="button" @click="dialogElementKey = elementKey">X</button>
 		</div>
 	</template>
 </div>
 <button type="button" @click="addElement">Add Element</button>
+<label class="bold big">Landmasses</label>
+<div class="subObjectHolder">
+	<template v-for="landmassKey in landmassKeys" :key="landmassKey">
+		<div class="subObject">
+			<NewLandmass v-model="planet.landmasses[getLandmassIndex(landmassKey)]" />
+			<button type="button" @click="dialogLandmassKey = landmassKey">X</button>
+		</div>
+	</template>
+</div>
+<button type="button" @click="addLandmass">Add Landmass</button>
 <Teleport to="body">
 	<div class="confirmDialog" v-if="dialogElementKey != undefined">
 		<div class="dialogContent">
 			<label class="bold">Do you really want to delete {{  planet.orbitalFeatures[getElementIndex(dialogElementKey)].name ? planet.orbitalFeatures[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</label>
 			<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
 			<button @click="dialogElementKey = undefined">No</button>
+		</div>
+	</div>
+</Teleport>
+<Teleport to="body">
+	<div class="confirmDialog" v-if="dialogLandmassKey != undefined">
+		<div class="dialogContent">
+			<label class="bold">Do you really want to delete {{  planet.landmasses[getLandmassIndex(dialogLandmassKey)].name ? planet.landmasses[getLandmassIndex(dialogLandmassKey)].name : "unnamed landmass" }}?</label>
+			<button @click="deleteLandmass(dialogLandmassKey); dialogLandmassKey = undefined">Yes</button>
+			<button @click="dialogLandmassKey = undefined">No</button>
 		</div>
 	</div>
 </Teleport>

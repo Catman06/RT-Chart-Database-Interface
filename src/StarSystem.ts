@@ -95,12 +95,12 @@ export class Landmass {
 	// Any additional info on the landmass itself
 	info?: string;
 	// Array on territories on the landmass
-	territories: Territories[] = [];
+	territories: Territory[] = [];
 
 	constructor() {}
 }
 
-export class Territories {
+export class Territory {
 	// Name of the territory
 	name?: string;
 	// Base terrain of the territory

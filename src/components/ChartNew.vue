@@ -116,13 +116,7 @@ import { onMounted } from 'vue';
 	textarea {
 		color: inherit;
 		font: inherit;
-		border-color: inherit;
-		border-style: solid;
-		width: 90%;
 		height: 20vh;
-		overflow: auto;
-		z-index: 1;
-		filter: blur(0px);
 	}
 
 	#closeButton {

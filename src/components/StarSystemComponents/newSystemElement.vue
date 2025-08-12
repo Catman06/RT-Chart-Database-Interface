@@ -8,6 +8,9 @@ const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, 
 
 const resourceModalOpen = ref(false);
 const resourceKeys: Ref<number[]> = ref([]);
+for (let i = 0; i < element.value.resources.length; i++) {
+	addResource();
+}
 const planetModalOpen = ref(false);
 
 function addResource() {
@@ -76,43 +79,7 @@ function deleteResource(resourceKey: number) {
 </Teleport>
 </template>
 
-<style lang="css">
-textarea {
-		display: block;
-		width: 90%;
-		height: 5rem;
-		margin: auto;
-}
-
-.modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: #10101050;
-	width: 100%;
-	height: calc(100% - 4.4rem);
-	display: flex;
-	align-items: center;	
-	justify-items: center;
-}
-
-.modal>.content {
-	background-color: var(--light_background);
-	border: 2px solid var(--line_color);
-	width: 95%;
-	height: 95%;
-	margin: auto;
-	overflow: auto;
-	filter:blur(0px);
-}
-
-.closeButton {
-	position: absolute;
-	top: 2.5%;
-	left: 2.5%;
-	margin: 0;
-}
-
+<style lang="css" scoped>
 #resources {
 width: 90%;
 margin: auto;

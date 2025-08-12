@@ -81,9 +81,9 @@ async function deleteElement(elementKey: number) {
 		</div>
 		<button class="addButton" type="button" @click="addStar">Add Star</button>
 		<label class="bold big">System Elements</label>
-		<div id="elements">
+		<div id="elements" class="subObjectHolder">
 			<template v-for="elementKey in elementKeys" :key="elementKey">
-				<div class="element">
+				<div class="subObject">
 					<label class="bold">System Element</label>
 					<NewSystemElement v-model="System.elements[getElementIndex(elementKey)]" />
 					<button type="button" @click="dialogElementKey = elementKey">X</button>
@@ -111,6 +111,7 @@ async function deleteElement(elementKey: number) {
 	}
 
 	& textarea {
+		display: block;
 		width: 90%;
 		height: 5rem;
 		margin: auto;
@@ -142,14 +143,14 @@ async function deleteElement(elementKey: number) {
 	}
 }
 
-#elements {
+.subObjectHolder {
 	width: 90%;
 	margin: auto;
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 
-	& .element {
+	& .subObject {
 		background-color: var(--light_background);
 		border: 2px solid var(--line_color);
 		margin: auto;
@@ -178,6 +179,35 @@ async function deleteElement(elementKey: number) {
 	}
 }
 
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #10101050;
+	width: 100%;
+	height: calc(100% - 4.4rem);
+	display: flex;
+	align-items: center;	
+	justify-items: center;
+}
+
+.modal>.content {
+	background-color: var(--light_background);
+	border: 2px solid var(--line_color);
+	width: 95%;
+	height: 95%;
+	margin: auto;
+	overflow: auto;
+	filter:blur(0px);
+}
+
+.closeButton {
+	position: absolute;
+	top: 2.5%;
+	left: 2.5%;
+	margin: 0;
+}
+
 & label.bold {
 	font-weight: bold;
 	margin: .5rem;
@@ -185,5 +215,6 @@ async function deleteElement(elementKey: number) {
 
 & label.big {
 	font-size: 1.25rem;
+	display: block;
 }
 </style>

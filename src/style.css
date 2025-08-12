@@ -75,6 +75,11 @@ label {
 textarea {
 	filter: blur(0px);
   overflow: auto;
+  display: block;
+  width: 90%;
+  height: 5rem;
+  margin: auto;
+  border: 2px solid var(--line_color);
 }
 
 #content {
