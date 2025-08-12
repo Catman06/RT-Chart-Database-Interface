@@ -84,13 +84,15 @@ async function deleteElement(elementKey: number) {
 		</div>
 		<button type="button" @click="addElement">Add Element</button>
 	</form>
-	<div class="confirmDialog" v-if="dialogElementKey != undefined">
-		<div class="dialogContent">
-			<p>Do you really want to delete {{  System.elements[getElementIndex(dialogElementKey)].name ? System.elements[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</p>
-			<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
-			<button @click="dialogElementKey = undefined">No</button>
+	<Teleport to="body">
+		<div class="confirmDialog" v-if="dialogElementKey != undefined">
+			<div class="dialogContent">
+				<p>Do you really want to delete {{  System.elements[getElementIndex(dialogElementKey)].name ? System.elements[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</p>
+				<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
+				<button @click="dialogElementKey = undefined">No</button>
+			</div>
 		</div>
-	</div>
+	</Teleport>
 </template>
 
 <style lang="css">
@@ -145,7 +147,7 @@ async function deleteElement(elementKey: number) {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 4.4rem);
 	display: flex;
 	justify-content: center;
 	align-items: center;

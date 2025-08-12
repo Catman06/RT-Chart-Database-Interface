@@ -68,13 +68,15 @@ async function deleteElement(elementKey: number) {
 	</template>
 </div>
 <button type="button" @click="addElement">Add Element</button>
-<div class="confirmDialog" v-if="dialogElementKey != undefined">
-	<div class="dialogContent">
-		<label class="bold">Do you really want to delete {{  planet.orbitalFeatures[getElementIndex(dialogElementKey)].name ? planet.orbitalFeatures[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</label>
-		<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
-		<button @click="dialogElementKey = undefined">No</button>
+<Teleport to="body">
+	<div class="confirmDialog" v-if="dialogElementKey != undefined">
+		<div class="dialogContent">
+			<label class="bold">Do you really want to delete {{  planet.orbitalFeatures[getElementIndex(dialogElementKey)].name ? planet.orbitalFeatures[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</label>
+			<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
+			<button @click="dialogElementKey = undefined">No</button>
+		</div>
 	</div>
-</div>
+</Teleport>
 </template>
 
 <style lang="css" scoped>
