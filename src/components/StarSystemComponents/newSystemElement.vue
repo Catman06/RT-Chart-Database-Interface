@@ -29,47 +29,51 @@ function deleteResource(resourceKey: number) {
 <template>
 <div>
 	<div>
-		<label for="elementName">Element Name</label>
+		<label for="elementName">Name</label>
 		<input name="elementName" v-model="element.name">
 	</div>
 	<div>
-		<label for="elementZone">Element Zone</label>
+		<label for="elementZone">Solar Zone</label>
 		<input name="elementZone" v-model="element.zone">
 	</div>
 	<div>
-		<label for="elementType">Element Type</label>
+		<label for="elementType">Type</label>
 		<input name="elementType" v-model="element.type">
 	</div>
 	<div>
-		<label for="elementInfo">Element Info</label>
+		<label for="elementInfo">Info</label>
 		<textarea name="elementInfo" v-model="element.info" />
 	</div>
 	<button type="button" @click="resourceModalOpen = true">Resources</button>
 	<!-- Planet button only appears when element.type is "planet" or "moon" (Case insensitive) -->
 	<button type="button" @click="planetModalOpen = true" v-if="element.type?.match(/^(planet|moon)$/i)">Planet</button>
 </div>
-<div class="modal" v-if="resourceModalOpen">
-	<div class="content">
-		<button class="closeButton" type="button" @click="resourceModalOpen = false">X</button>
-		<label>Resource Modal for {{  element.name }}</label>
-		<div id="resources">
-			<template v-for="resourceKey in resourceKeys" :key="resourceKey" >
-				<div class="resource">
-					<NewResource v-model="element.resources[getResourceIndex(resourceKey)]" />
-					<button type="button" @click="deleteResource(resourceKey)">X</button>
-				</div>
-			</template>
+<Teleport to="body">
+	<div class="modal" v-if="resourceModalOpen">
+		<div class="content">
+			<button class="closeButton" type="button" @click="resourceModalOpen = false">X</button>
+			<label class="bold big">Resource Modal for {{  element.name ? element.name : "System Element" }}</label>
+			<div id="resources">
+				<template v-for="resourceKey in resourceKeys" :key="resourceKey" >
+					<div class="resource">
+						<NewResource v-model="element.resources[getResourceIndex(resourceKey)]" />
+						<button type="button" @click="deleteResource(resourceKey)">X</button>
+					</div>
+				</template>
+			</div>
+			<button type="button" @click="addResource">Add Resource</button>
 		</div>
-		<button type="button" @click="addResource">Add Resource</button>
 	</div>
-</div>
-<div class="modal" v-if="planetModalOpen">
-	<div class="content">
-		<button class="closeButton" type="button" @click="planetModalOpen = false">X</button>
-		<label class="bold">Planet Modal for {{  element.name  }}</label>
-		<NewPlanet v-model="element" />
+</Teleport>
+<Teleport to="body">
+	<div class="modal" v-if="planetModalOpen">
+		<div class="content">
+			<button class="closeButton" type="button" @click="planetModalOpen = false">X</button>
+			<label class="bold big">Planet Modal for {{  element.name ? element.name : "System Element"  }}</label>
+			<NewPlanet v-model="element" />
+		</div>
 	</div>
-</div>
+</Teleport>
 </template>
 
 <style lang="css">
@@ -78,17 +82,15 @@ textarea {
 		width: 90%;
 		height: 5rem;
 		margin: auto;
-		z-index: 10;
 }
 
 .modal {
-	z-index: 20;
 	position: fixed;
 	top: 0;
 	left: 0;
 	background-color: #10101050;
 	width: 100%;
-	height: 100%;
+	height: calc(100% - 4.4rem);
 	display: flex;
 	align-items: center;	
 	justify-items: center;

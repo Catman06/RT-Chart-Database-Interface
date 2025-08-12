@@ -58,7 +58,7 @@ async function deleteElement(elementKey: number) {
 		<input name="planetHabitability" v-model="planet.habitability">
 	</div>
 </div>
-<label class="bold">System Elements</label>
+<label class="bold big">System Elements</label>
 <div id="elements">
 	<template v-for="elementKey in elementKeys" :key="elementKey">
 		<div class="element">

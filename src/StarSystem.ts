@@ -20,6 +20,8 @@ export class Star {
 	name?: string;
 	// The type of star
 	type?: string;
+	// Further info about the star
+	info?: string;
 
 	constructor () {}
 }

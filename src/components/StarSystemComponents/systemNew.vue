@@ -52,37 +52,45 @@ async function deleteElement(elementKey: number) {
 <template>
 	<button @click="() => console.log(System)">Print</button>
 	<form id="newSystemForm">
+		<label class="bold big">System</label>
 		<div>
-			<label for="systemName" class="bold">System Name</label>
+			<label for="systemName">System Name</label>
 			<input name="systemName" v-model="System.name">
 		</div>
 		<div>
 			<label for="systemInfo">System Info</label>
 			<textarea name="systemInfo" v-model="System.info" />
 		</div>
-		<label class="bold">System Stars</label>
+		<label class="bold big">System Stars</label>
 		<div id="stars">
 			<template v-for="starKey in starKeys" :key="starKey">
 				<div class="star">
-					<label :for="'starName' + starKey">Name</label>
-					<input :name="'starName' + starKey" v-model="System.stars[getStarIndex(starKey)].name">
-					<label :for="'starType' + starKey">Type</label>
-					<input :name="'starType' + starKey" v-model="System.stars[getStarIndex(starKey)].type">
-					<button type="button" @click="deleteStar(starKey)">X</button>
+					<div>
+						<label :for="'starName' + starKey">Name</label>
+						<input :name="'starName' + starKey" v-model="System.stars[getStarIndex(starKey)].name">
+						<label :for="'starType' + starKey">Type</label>
+						<input :name="'starType' + starKey" v-model="System.stars[getStarIndex(starKey)].type">
+						<button type="button" @click="deleteStar(starKey)">X</button>
+					</div>
+					<div class="starInfo">
+						<label :for="'starInfo' + starKey">Info</label>
+						<textarea :name="'starInfo' + starKey"></textarea>
+					</div>
 				</div>
 			</template>
 		</div>
-		<button type="button" @click="addStar">Add Star</button>
-		<label class="bold">System Elements</label>
+		<button class="addButton" type="button" @click="addStar">Add Star</button>
+		<label class="bold big">System Elements</label>
 		<div id="elements">
 			<template v-for="elementKey in elementKeys" :key="elementKey">
 				<div class="element">
+					<label class="bold">System Element</label>
 					<NewSystemElement v-model="System.elements[getElementIndex(elementKey)]" />
 					<button type="button" @click="dialogElementKey = elementKey">X</button>
 				</div>
 			</template>
 		</div>
-		<button type="button" @click="addElement">Add Element</button>
+		<button type="button" class="addButton" @click="addElement">Add Element</button>
 	</form>
 	<Teleport to="body">
 		<div class="confirmDialog" v-if="dialogElementKey != undefined">
@@ -102,11 +110,6 @@ async function deleteElement(elementKey: number) {
 		margin: auto;
 	}
 
-	& label.bold {
-		font-weight: bold;
-		margin: .5rem;
-	}
-
 	& textarea {
 		width: 90%;
 		height: 5rem;
@@ -115,29 +118,44 @@ async function deleteElement(elementKey: number) {
 
 	& .star {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
-		margin: auto;
+		justify-content: center;
+		background-color: var(--light_background);
+		border: 2px solid var(--line_color);
+		margin: .5rem auto;
+		padding: .5rem 0rem;
 		width: 95%;
-		&>* {
+		&>*:not(.starInfo) {
+			display: inherit;
+			align-items: center;
+			width: 100%;
 			height: 1.5rem;
+		}
+		&>.starInfo {
+			width: 100%;
 		}
 	}
 
-	& #elements {
-		width: 90%;
-		margin: auto;
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
+	& .addButton {
+		margin: .5rem auto auto auto;
+	}
+}
 
-		& .element {
-			background-color: var(--light_background);
-			border: 2px solid var(--line_color);
+#elements {
+	width: 90%;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+
+	& .element {
+		background-color: var(--light_background);
+		border: 2px solid var(--line_color);
+		margin: auto;
+		width: 49%;
+		&>* {
 			margin: auto;
-			width: 49%;
-			&>* {
-				margin: auto;
-			}
 		}
 	}
 }
@@ -158,5 +176,14 @@ async function deleteElement(elementKey: number) {
 		border: 2px solid var(--line_color);
 		padding: 1rem;
 	}
+}
+
+& label.bold {
+	font-weight: bold;
+	margin: .5rem;
+}
+
+& label.big {
+	font-size: 1.25rem;
 }
 </style>
