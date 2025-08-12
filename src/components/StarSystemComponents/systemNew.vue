@@ -47,10 +47,18 @@ async function deleteElement(elementKey: number) {
 	System.value.elements.splice(index, 1);
 	elementKeys.value.splice(index, 1);
 }
+
+async function saveSystem() {
+	await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
+			method: "POST",
+			body: JSON.stringify(System.value),
+		})
+}
 </script>
 
 <template>
 	<button @click="() => console.log(System)">Print</button>
+	<button @click="saveSystem()">Save</button>
 	<form id="newSystemForm">
 		<label class="bold big">System</label>
 		<div>
