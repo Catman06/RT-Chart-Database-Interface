@@ -96,6 +96,8 @@ export class Landmass {
 	info?: string;
 	// Array on territories on the landmass
 	territories: Territories[] = [];
+
+	constructor() {}
 }
 
 export class Territories {
@@ -109,4 +111,6 @@ export class Territories {
 	landmarks: string[] = [];
 	// Any additional info on the territory
 	info?: string;
+
+	constructor() {}
 }
