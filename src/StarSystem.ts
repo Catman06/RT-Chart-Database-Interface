@@ -29,6 +29,8 @@ export class SystemElement {
 	name?: string;
 	// The type of element this is
 	type?: string;
+	// The zone (Inner Cauldron|Primary Biosphere|Outer Reaches) of this element
+	zone?: string;
 	// The resources that can be exploited on this element
 	resources: Resource[] = [];
 	// General info for this element, such as rules or notes that don't fit elsewhere
@@ -81,9 +83,7 @@ export class Planet {
 	habitability?: string;
 	// Any landmasses the planet has
 	landmasses: Landmass[] = [];
-	// Further notes on the planet
-	info?: string;
-	
+
 	constructor() {}
 }
 

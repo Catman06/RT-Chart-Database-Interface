@@ -53,14 +53,14 @@ async function deleteElement(elementKey: number) {
 	<button @click="() => console.log(System)">Print</button>
 	<form id="newSystemForm">
 		<div>
-			<label for="systemName">System Name</label>
+			<label for="systemName" class="bold">System Name</label>
 			<input name="systemName" v-model="System.name">
 		</div>
 		<div>
 			<label for="systemInfo">System Info</label>
 			<textarea name="systemInfo" v-model="System.info" />
 		</div>
-		<label>System Stars</label>
+		<label class="bold">System Stars</label>
 		<div id="stars">
 			<template v-for="starKey in starKeys" :key="starKey">
 				<div class="star">
@@ -73,7 +73,7 @@ async function deleteElement(elementKey: number) {
 			</template>
 		</div>
 		<button type="button" @click="addStar">Add Star</button>
-		<label>System Elements</label>
+		<label class="bold">System Elements</label>
 		<div id="elements">
 			<template v-for="elementKey in elementKeys" :key="elementKey">
 				<div class="element">
@@ -100,6 +100,11 @@ async function deleteElement(elementKey: number) {
 		margin: auto;
 	}
 
+	& label.bold {
+		font-weight: bold;
+		margin: .5rem;
+	}
+
 	& textarea {
 		width: 90%;
 		height: 5rem;
@@ -124,8 +129,10 @@ async function deleteElement(elementKey: number) {
 		flex-wrap: wrap;
 
 		& .element {
+			background-color: var(--light_background);
+			border: 2px solid var(--line_color);
 			margin: auto;
-			width: 50%;
+			width: 49%;
 			&>* {
 				margin: auto;
 			}

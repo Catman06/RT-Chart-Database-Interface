@@ -33,6 +33,10 @@ function deleteResource(resourceKey: number) {
 		<input name="elementName" v-model="element.name">
 	</div>
 	<div>
+		<label for="elementZone">Element Zone</label>
+		<input name="elementZone" v-model="element.zone">
+	</div>
+	<div>
 		<label for="elementType">Element Type</label>
 		<input name="elementType" v-model="element.type">
 	</div>
@@ -62,7 +66,7 @@ function deleteResource(resourceKey: number) {
 <div class="modal" v-if="planetModalOpen">
 	<div class="content">
 		<button class="closeButton" type="button" @click="planetModalOpen = false">X</button>
-		<p>Planet Modal for {{  element.name  }}</p>
+		<label class="bold">Planet Modal for {{  element.name  }}</label>
 		<NewPlanet v-model="element" />
 	</div>
 </div>

@@ -57,12 +57,8 @@ async function deleteElement(elementKey: number) {
 		<label for="planetHabitability">Habitability</label>
 		<input name="planetHabitability" v-model="planet.habitability">
 	</div>
-	<div>
-		<label for="planetInfo">Planet Info</label>
-		<textarea name="planetInfo" v-model="planet.info" />
-	</div>
 </div>
-<label>System Elements</label>
+<label class="bold">System Elements</label>
 <div id="elements">
 	<template v-for="elementKey in elementKeys" :key="elementKey">
 		<div class="element">
@@ -70,11 +66,11 @@ async function deleteElement(elementKey: number) {
 			<button type="button" @click="dialogElementKey = elementKey">X</button>
 		</div>
 	</template>
-	<button type="button" @click="addElement">Add Element</button>
 </div>
+<button type="button" @click="addElement">Add Element</button>
 <div class="confirmDialog" v-if="dialogElementKey != undefined">
 	<div class="dialogContent">
-		<p>Do you really want to delete {{  planet.orbitalFeatures[getElementIndex(dialogElementKey)].name ? planet.orbitalFeatures[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</p>
+		<label class="bold">Do you really want to delete {{  planet.orbitalFeatures[getElementIndex(dialogElementKey)].name ? planet.orbitalFeatures[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</label>
 		<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
 		<button @click="dialogElementKey = undefined">No</button>
 	</div>
