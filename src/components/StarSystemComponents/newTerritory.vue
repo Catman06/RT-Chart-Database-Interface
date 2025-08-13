@@ -47,18 +47,15 @@ function deleteLandmark(landmarkKey: number) {
 
 <template>
 <div>
-	<div>
-		<label>Name</label>
+	<label>Name
 		<input v-model="territory.name">
-	</div>
-	<div>
-		<label>Base Terrain</label>
+	</label>
+	<label>Base Terrain
 		<input v-model="territory.terrain">
-	</div>
-	<div>
-		<label>Info</label>
+	</label>
+	<label>Info
 		<textarea v-model="territory.info" />
-	</div>
+	</label>
 	<div id="traits">
 		<template v-for="traitKey in traitKeys" :key="traitKey">
 			<div class="trait">

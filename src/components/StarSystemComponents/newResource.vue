@@ -7,22 +7,18 @@ const resource = defineModel({ type: [Resource] as PropType<Resource>, required:
 
 <template>
 	<div>
-		<div>
-			<label for="resourceType">Type</label>
-			<input name="resourceType" v-model="resource.type" required>
-		</div>
-		<div>
-			<label for="resourceQuantity">Quantity</label>
-			<input name="resourceQuantity" type="number" v-model="resource.quantity" required>
-		</div>
-		<div>
-			<label for="resourceExploited">Exploited</label>
-			<input name="resourceExploited" type="checkbox" v-model="resource.exploited">
-		</div>
-		<div>
-			<label for="resourceInfo">Resource Info</label>
-			<textarea name="resourceInfo" v-model="resource.info" />
-		</div>
+			<label for="resourceType">Type
+				<input name="resourceType" v-model="resource.type" required>
+			</label>
+			<label for="resourceQuantity">Quantity
+				<input name="resourceQuantity" type="number" v-model="resource.quantity" required>
+			</label>
+			<label for="resourceExploited">Exploited
+				<input name="resourceExploited" type="checkbox" v-model="resource.exploited">
+			</label>
+			<label for="resourceInfo">Resource Info
+				<textarea name="resourceInfo" v-model="resource.info" />
+			</label>
 	</div>
 </template>
 

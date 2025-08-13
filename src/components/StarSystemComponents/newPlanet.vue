@@ -57,30 +57,24 @@ async function deleteLandmass(landmassKey: number) {
 
 <template>
 <div>
-	<div>
-		<label for="planetBody">Body</label>
+	<label for="planetBody">Body
 		<input name="planetBody" v-model="planet.body">
-	</div>
-	<div>
-		<label for="planetGravity">Gravity</label>
+	</label>
+	<label for="planetGravity">Gravity
 		<input name="planetGravity" v-model="planet.gravity">
-	</div>
-	<div>
-		<label for="planetAtmosphere">Atmosphere</label>
+	</label>
+	<label for="planetAtmosphere">Atmosphere
 		<input name="planetAtmosphere" v-model="planet.atmosphere">
-	</div>
-	<div>
-		<label for="planetAtmosComposition">Atmospheric Composition</label>
+	</label>
+	<label for="planetAtmosComposition">Atmospheric Composition
 		<input name="planetAtmosComposition" v-model="planet.atmosphereComposition">
-	</div>
-	<div>
-		<label for="planetClimate">Climate</label>
+	</label>
+	<label for="planetClimate">Climate
 		<input name="planetClimate" v-model="planet.climate">
-	</div>
-	<div>
-		<label for="planetHabitability">Habitability</label>
+	</label>
+	<label for="planetHabitability">Habitability
 		<input name="planetHabitability" v-model="planet.habitability">
-	</div>
+	</label>
 </div>
 <label class="bold big">Orbital Features</label>
 <div class="subObjectHolder">

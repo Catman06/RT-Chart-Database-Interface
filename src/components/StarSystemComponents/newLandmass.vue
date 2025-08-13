@@ -30,14 +30,12 @@ function deleteTerritory(territoryKey: number) {
 
 <template>
 <div>
-	<div>
-		<label>Name</label>
+	<label>Name
 		<input v-model="landmass.name">
-	</div>
-	<div>
-		<label>Info</label>
+	</label>
+	<label>Info
 		<textarea v-model="landmass.info" />
-	</div>
+	</label>
 	<button type="button" @click="territoriesModalOpen = true">Territories</button>
 </div>
 <Teleport to="#content">

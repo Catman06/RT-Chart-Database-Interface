@@ -31,22 +31,18 @@ function deleteResource(resourceKey: number) {
 
 <template>
 <div>
-	<div>
-		<label for="elementName">Name</label>
+	<label for="elementName">Name
 		<input name="elementName" v-model="element.name">
-	</div>
-	<div>
-		<label for="elementZone">Solar Zone</label>
+	</label>
+	<label for="elementZone">Solar Zone
 		<input name="elementZone" v-model="element.zone">
-	</div>
-	<div>
-		<label for="elementType">Type</label>
+	</label>
+	<label for="elementType">Type
 		<input name="elementType" v-model="element.type">
-	</div>
-	<div>
-		<label for="elementInfo">Info</label>
+	</label>
+	<label for="elementInfo">Info
 		<textarea name="elementInfo" v-model="element.info" />
-	</div>
+	</label>
 	<button type="button" @click="resourceModalOpen = true">Resources</button>
 	<!-- Planet button only appears when element.type is "planet" or "moon" (Case insensitive) -->
 	<button type="button" @click="planetModalOpen = true" v-if="element.type?.match(/^(planet|moon)$/i)">Planet</button>
@@ -87,9 +83,10 @@ display: flex;
 align-items: center;
 flex-wrap: wrap;
 
-	& .resource {
+& .resource {
+		border: 2px solid var(--line_color);
 		margin: auto;
-		width: 50%;
+		width: 49%;
 		&>* {
 			margin: auto;
 		}
