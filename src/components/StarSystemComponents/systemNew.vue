@@ -51,10 +51,12 @@ async function deleteElement(elementKey: number) {
 // Validate and, if valid, save the entered system to the database
 async function saveSystem(event: Event) {
 	event.preventDefault();
-	console.log("Further validating system")
+	console.log("Validating system");
+	let valid = System.value.validate();
 
-	// 
-
+	if (typeof valid != 'boolean') {
+		console.error("System not valid", valid);
+	}
 
 	console.log("Saving system");
 	// await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
@@ -71,7 +73,7 @@ async function saveSystem(event: Event) {
 		<label class="bold big">System</label>
 		<div>
 			<label for="systemName">System Name</label>
-			<input name="systemName" v-model="System.name" required>
+			<input name="systemName" v-model="System.name">
 		</div>
 		<div>
 			<label for="systemInfo">System Info</label>
@@ -83,7 +85,7 @@ async function saveSystem(event: Event) {
 				<div class="star">
 					<div>
 						<label :for="'starName' + starKey">Name</label>
-						<input :name="'starName' + starKey" v-model="System.stars[getStarIndex(starKey)].name" required>
+						<input :name="'starName' + starKey" v-model="System.stars[getStarIndex(starKey)].name">
 						<label :for="'starType' + starKey">Type</label>
 						<input :name="'starType' + starKey" v-model="System.stars[getStarIndex(starKey)].type">
 						<button type="button" @click="deleteStar(starKey)">X</button>
@@ -157,25 +159,26 @@ async function saveSystem(event: Event) {
 	& .addButton {
 		margin: .5rem auto auto auto;
 	}
-}
-
-.subObjectHolder {
-	width: 90%;
-	margin: auto;
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-
-	& .subObject {
-		background-color: var(--light_background);
-		border: 2px solid var(--line_color);
+	
+	& .subObjectHolder {
+		width: 90%;
 		margin: auto;
-		width: 49%;
-		&>* {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+	
+		& .subObject {
+			background-color: var(--light_background);
+			border: 2px solid var(--line_color);
 			margin: auto;
+			width: 49%;
+			&>* {
+				margin: auto;
+			}
 		}
 	}
 }
+
 
 .confirmDialog {
 	position: fixed;

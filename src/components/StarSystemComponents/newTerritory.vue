@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, type PropType, type Ref } from 'vue';
-import { Territory } from '../../StarSystem';
+import { Landmark, Territory, Trait } from '../../StarSystem';
 
 const territory = defineModel({ type: [Territory] as PropType<Territory>, required: true});
 
@@ -12,7 +12,7 @@ for (let i = 0; i < territory.value.traits.length; i++) {
 function addTrait() {
 	let index = traitKeys.value.length;
 	while (traitKeys.value.includes(index)) { index++ };
-	territory.value.traits[territory.value.traits.length] = "";
+	territory.value.traits[territory.value.traits.length] = new Trait;
 	traitKeys.value.push(index);
 }
 function getTraitIndex(traitKey: number) {
@@ -32,7 +32,7 @@ for (let i = 0; i < territory.value.landmarks.length; i++) {
 function addLandmark() {
 	let index = landmarkKeys.value.length;
 	while (landmarkKeys.value.includes(index)) { index++ };
-	territory.value.landmarks[territory.value.landmarks.length] = "";
+	territory.value.landmarks[territory.value.landmarks.length] = new Landmark;
 	landmarkKeys.value.push(index);
 }
 function getLandmarkIndex(landmarkKey: number) {
@@ -64,11 +64,11 @@ function deleteLandmark(landmarkKey: number) {
 			<div class="trait">
 				<div>
 					<label :for="'trait' + traitKey">Trait</label>
-					<input :name="'trait' + traitKey" v-model="territory.traits[getTraitIndex(traitKey)]" required>
+					<input :name="'trait' + traitKey" v-model="territory.traits[getTraitIndex(traitKey)].type">
 				</div>
 				<div class="traitInfo">
 					<label :for="'traitInfo' + traitKey">Info</label>
-					<textarea :name="'traitInfo' + traitKey"></textarea>
+					<textarea :name="'traitInfo' + traitKey" v-model="territory.traits[getTraitIndex(traitKey)].info"></textarea>
 				</div>
 				<button type="button" @click="deleteTrait(traitKey)">X</button>
 			</div>
@@ -80,11 +80,11 @@ function deleteLandmark(landmarkKey: number) {
 			<div class="landmark">
 				<div>
 					<label :for="'landmark' + landmarkKey">Landmark</label>
-					<input :name="'landmark' + landmarkKey" v-model="territory.landmarks[getLandmarkIndex(landmarkKey)]" required>
+					<input :name="'landmark' + landmarkKey" v-model="territory.landmarks[getLandmarkIndex(landmarkKey)].type">
 				</div>
 				<div class="landmarkInfo">
 					<label :for="'landmarkInfo' + landmarkKey">Info</label>
-					<textarea :name="'landmarkInfo' + landmarkKey"></textarea>
+					<textarea :name="'landmarkInfo' + landmarkKey" v-model="territory.landmarks[getLandmarkIndex(landmarkKey)].info"></textarea>
 				</div>
 				<button type="button" @click="deleteLandmark(landmarkKey)">X</button>
 			</div>
