@@ -62,7 +62,7 @@ input {
   width: 95%;
 }
 
-input:focus-visible {
+input:focus-visible, textarea:focus-visible {
   border-color: rgb(191, 255, 210);
   background-color: var(--lighter_background);
   outline: .1rem solid var(--line_color);
@@ -70,7 +70,7 @@ input:focus-visible {
 
 label {
   margin: 0rem 1rem 0rem 1rem;
-  text-align: center;
+  display: block;
 }
 
 textarea {
@@ -80,7 +80,9 @@ textarea {
   width: 90%;
   height: 5rem;
   margin: auto;
+  background-color: var(--light_background);
   border: 2px solid var(--line_color);
+  resize: none;
 }
 
 #filter {
