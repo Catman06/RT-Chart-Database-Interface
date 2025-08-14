@@ -3,7 +3,7 @@ import { ref, type PropType, type Ref } from 'vue';
 import { Landmass, Territory } from '../../StarSystem';
 import NewTerritory from './newTerritory.vue';
 
-const landmass = defineModel({ type: [Landmass] as PropType<Landmass>, required: true});
+const landmass = defineModel({ type: Object as PropType<Landmass>, required: true});
 
 const territoriesModalOpen = ref(false);
 const territoryKeys: Ref<number[]> = ref([]);

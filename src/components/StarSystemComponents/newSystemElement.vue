@@ -4,7 +4,7 @@ import { Resource, SystemElement } from '../../StarSystem';
 import NewResource from './newResource.vue';
 import NewPlanet from './newPlanet.vue';
 
-const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, required: true});
+const element = defineModel({ type: Object as PropType<SystemElement>, required: true});
 
 const resourceModalOpen = ref(false);
 const resourceKeys: Ref<number[]> = ref([]);

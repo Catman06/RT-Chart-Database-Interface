@@ -15,12 +15,17 @@ try {
 	throw new Exception("Connection failed: " . $ex, 1);
 }
 
-// Get the names of all systems in the database
+// Get content of the system with the passed ID
 try {
 	$dbh->beginTransaction();
-	$stmt = $dbh->prepare("SELECT id, jsonb_path_query(system, '$.name') AS names FROM systems");
+	$stmt = $dbh->prepare("SELECT id, system FROM systems WHERE id = ?");
+	$stmt->bindValue(1, $_GET['id']); 
+	
 	$stmt->execute();
-	$response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$stmt->SetFetchMode(PDO::FETCH_NAMED);
+
+	$response += $stmt->fetchAll();
+	$response[0]['system'] = json_decode($response[0]['system']);
 } catch (Exception $ex) {
 	$dbh->rollBack();
 	throw new Exception("Failed to add to database: " . $ex, 1);

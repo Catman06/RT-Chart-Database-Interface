@@ -1,19 +1,23 @@
 <script lang="ts" setup>
-import { ref, type Ref } from 'vue';
+import { ref, type PropType, type Ref } from 'vue';
 import NewSystemElement from './newSystemElement.vue';
 import { Star, StarSystem, SystemElement } from '../../StarSystem';
 
-const System = ref(new StarSystem);
+const SystemID = defineModel('id', { type: Number });
+const SystemIn = defineModel('system', { type: Object as PropType<StarSystem> });
+const System = ref(SystemIn.value ? SystemIn.value : SystemIn.value = new StarSystem);
+
 const starKeys: Ref<number[]> = ref([]);
 const elementKeys: Ref<number[]> = ref([]);
 
-// Setup keys if a populated System is given UNTESTED
-for (let i = 0; i < System.value.stars.length; i++) {
-	addStar();
-}
-for (let i = 0; i < System.value.elements.length; i++) {
-	addElement();
-}
+// Setup keys if a populated System is given
+console.log(System.value.stars.length);
+System.value.stars.forEach(() => {
+	starKeys.value.push(starKeys.value.length);
+});
+System.value.elements.forEach(() => {
+	elementKeys.value.push(elementKeys.value.length);
+});
 
 function addStar() {
 	let index = starKeys.value.length;
@@ -56,13 +60,14 @@ async function saveSystem(event: Event) {
 
 	if (typeof valid != 'boolean') {
 		console.error("System not valid", valid);
+		return;
 	}
 
 	console.log("Saving system");
-	// await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
-	// 		method: "POST",
-	// 		body: JSON.stringify(System.value),
-	// 	})
+	await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
+			method: "POST",
+			body: JSON.stringify(System.value),
+		})
 }
 </script>
 

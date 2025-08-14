@@ -2,7 +2,7 @@
 import type { PropType } from 'vue';
 import { Resource } from '../../StarSystem';
 
-const resource = defineModel({ type: [Resource] as PropType<Resource>, required: true});
+const resource = defineModel({ type: Object as PropType<Resource>, required: true});
 </script>
 
 <template>

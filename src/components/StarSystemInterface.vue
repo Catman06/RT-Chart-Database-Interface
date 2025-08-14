@@ -2,23 +2,27 @@
 import { ref, type Ref } from 'vue';
 import SystemDisplay from './StarSystemComponents/systemDisplay.vue';
 import NewSystem from './StarSystemComponents/newSystem.vue';
+import type { StarSystem } from '../StarSystem';
 
+const System: Ref<StarSystem | undefined> = ref();
+const SystemID: Ref<number | undefined> = ref();
 const mode: Ref<string | undefined> = ref();
 </script>
 
 <template>
 	<div id="modeSelect">
-			<label for="addRadio">Add Mode
-				<input id="addRadio" type="radio" name="mode" value="add" v-model="mode" />
-				<span class="mark"></span>
-			</label>
-			<label for="showRadio">Display Mode
-				<input id="showRadio" type="radio" name="mode" value="show" v-model="mode" />
+		<label for="showRadio">Display Mode
+			<input id="showRadio" type="radio" name="mode" value="show" v-model="mode" />
+			<span class="mark"></span>
+		</label>
+			<label for="editRadio">Edit Mode
+				<input id="editRadio" type="radio" name="mode" value="edit" v-model="mode" />
 				<span class="mark"></span>
 			</label>
 	</div>
-<NewSystem v-if="mode == 'add'" />
-<SystemDisplay v-if="mode == 'show'" />
+	<button @click="console.log(System, SystemID)">Print</button>
+<NewSystem v-if="mode == 'edit'" v-model:system="System" v-model:id="SystemID" />
+<SystemDisplay v-if="mode == 'show'" v-model:system="System" v-model:id="SystemID" />
 </template>
 
 <style lang="css" scoped>
@@ -48,7 +52,7 @@ const mode: Ref<string | undefined> = ref();
 		background-color: var(--lighter_background);
 	}
 
-	#addRadio ~ .mark {
+	#showRadio ~ .mark {
 		left: unset;
 		right: 0;
 	}
@@ -56,6 +60,7 @@ const mode: Ref<string | undefined> = ref();
 	& label {
 		position: relative;
 		margin: 0;
+		width: 7.5rem;
 
 		& input:checked ~ .mark:after {
 			display: block;
@@ -67,11 +72,13 @@ const mode: Ref<string | undefined> = ref();
 		}
 	}
 	
-	& label[for="addRadio"] {
+	& label[for="showRadio"] {
+		text-align: right;
 		padding-right: 2rem;
 	}
 
-	& label[for="showRadio"] {
+	& label[for="editRadio"] {
+		text-align: left;
 		padding-left: 2rem;
 	}
 

@@ -4,7 +4,7 @@ import { Landmass, Planet, SystemElement } from '../../StarSystem';
 import NewSystemElement from './newSystemElement.vue';
 import NewLandmass from './newLandmass.vue';
 
-const element = defineModel({ type: [SystemElement] as PropType<SystemElement>, required: true});
+const element = defineModel({ type: Object as PropType<SystemElement>, required: true});
 const planet = ref(element.value.planet ? element.value.planet : element.value.planet = new Planet);
 
 const elementKeys: Ref<number[]> = ref([]);

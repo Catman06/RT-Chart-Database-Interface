@@ -2,7 +2,7 @@
 import { ref, type PropType, type Ref } from 'vue';
 import { Landmark, Territory, Trait } from '../../StarSystem';
 
-const territory = defineModel({ type: [Territory] as PropType<Territory>, required: true});
+const territory = defineModel({ type: Object as PropType<Territory>, required: true});
 
 const traitKeys: Ref<number[]> = ref([]);
 for (let i = 0; i < territory.value.traits.length; i++) {
