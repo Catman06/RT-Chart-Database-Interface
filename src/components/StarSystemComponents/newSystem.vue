@@ -1,17 +1,16 @@
 <script lang="ts" setup>
 import { ref, type PropType, type Ref } from 'vue';
 import NewSystemElement from './newSystemElement.vue';
-import { Star, StarSystem, SystemElement } from '../../StarSystem';
+import { Star, StarSystem, SystemElement, validate } from '../../StarSystem';
 
 const SystemID = defineModel('id', { type: Number });
 const SystemIn = defineModel('system', { type: Object as PropType<StarSystem> });
-const System = ref(SystemIn.value ? SystemIn.value : SystemIn.value = new StarSystem);
+const System: Ref<StarSystem> = ref(SystemIn.value ? SystemIn.value : SystemIn.value = new StarSystem);
 
 const starKeys: Ref<number[]> = ref([]);
 const elementKeys: Ref<number[]> = ref([]);
 
 // Setup keys if a populated System is given
-console.log(System.value.stars.length);
 System.value.stars.forEach(() => {
 	starKeys.value.push(starKeys.value.length);
 });
@@ -56,7 +55,7 @@ async function deleteElement(elementKey: number) {
 async function saveSystem(event: Event) {
 	event.preventDefault();
 	console.log("Validating system");
-	let valid = System.value.validate();
+	let valid = validate(System.value);
 
 	if (typeof valid != 'boolean') {
 		console.error("System not valid", valid);
@@ -64,10 +63,23 @@ async function saveSystem(event: Event) {
 	}
 
 	console.log("Saving system");
-	await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
-			method: "POST",
-			body: JSON.stringify(System.value),
+	// Check if the system is already in the database via ID
+	let exists = false;
+	try {
+		(await fetch(`https://zipperserver.duckdns.org/php/systemGetLists.php?col=id&query=${SystemID.value}`)).json().then((response) => {
+			if (response.length > 0) {
+				exists = true;
+			}
 		})
+	} catch (error) {
+		console.error("Failed to retrieve IDs in the database", error);
+	}
+
+
+	// await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
+	// 		method: "POST",
+	// 		body: JSON.stringify(System.value),
+	// 	})
 }
 </script>
 

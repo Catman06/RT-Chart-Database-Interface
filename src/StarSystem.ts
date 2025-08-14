@@ -10,30 +10,6 @@ export class StarSystem {
 	info?: string;
 
 	constructor() {}
-
-	validate(): boolean | string[] {
-		let errors: string[] = [];
-		let path: string = this.name ? this.name : "System";
-
-		if (!this.name) {
-			errors.push("System(Name)");
-		}
-
-		this.stars.forEach(star => {
-			let valid = star.validate(path);
-			if (typeof valid != "boolean") {
-				errors = errors.concat(valid);
-			}
-		});
-		this.elements.forEach(element => {
-			let valid = element.validate(path);
-			if (typeof valid != "boolean") {
-				errors = errors.concat(valid);
-			}
-		});
-
-		return errors.length ? errors : true;
-	}
 }
 
 // Holds the data for a star
@@ -46,27 +22,13 @@ export class Star {
 	info?: string;
 
 	constructor () {}
-
-	validate(path: string): boolean | string[] {
-		path = path + '/' + (this.name ? this.name : "Star");
-		let errors: string[] = [];
-
-		if (!this.name) {
-			errors.push(path + "(Name)");
-		}
-		if (!this.type) {
-			errors.push(path + "(Type)");
-		}
-
-		return errors.length ? errors : true;
-	}
 }
 
 // Holds the data for a system element, like a planet or derelict station
 export class SystemElement {
 	// The name of the element (if applicable)
 	name?: string;
-	// The type of element this is
+	// The type of element resource is
 	type?: string;
 	// The zone (Inner Cauldron|Primary Biosphere|Outer Reaches) of this element
 	zone?: string;
@@ -78,33 +40,6 @@ export class SystemElement {
 	planet?: Planet;
 
 	constructor() {}
-
-	validate(path: string): boolean | string[] {
-		path = path + '/' + (this.name ? this.name : this.type ? this.type : "System_Element");
-		let errors: string[] = [];
-
-		if (!this.type) {
-			errors.push(path + "(Type)");
-		}
-		if (!this.zone) {
-			errors.push(path + "(Zone)");
-		}
-
-		this.resources.forEach(resource => {
-			let valid = resource.validate(path);
-			if (typeof valid != "boolean") {
-				errors = errors.concat(valid);
-			}
-		});
-		if (this.planet) {
-			let valid = this.planet.validate(path);
-			if (typeof valid != "boolean") {
-				errors = errors.concat(valid);
-			}
-		}
-
-		return errors.length ? errors : true;
-	}
 }
 
 // Holds info on a specific instance of a resource
@@ -119,20 +54,6 @@ export class Resource {
 	info?: string;
 
 	constructor() {}
-
-	validate(path: string): boolean | string[] {
-		path = path + '/' + (this.type ? this.type : "Resource");
-		let errors: string[] = [];
-
-		if (!this.type) {
-			errors.push(path + "(Type)");
-		}
-		if (!this.quantity) {
-			errors.push(path + "(Quantity)");
-		}
-
-		return errors.length ? errors : true;
-	}
 }
 
 // Holds data for a planet
@@ -155,33 +76,6 @@ export class Planet {
 	landmasses: Landmass[] = [];
 
 	constructor() {}
-
-	validate(path: string): boolean | string[] {
-		path = path + '/' + ("Planet");
-		let errors: string[] = [];
-
-		if (!this.body) {
-			errors.push(path + "(Body)");
-		}
-		if (!this.gravity) {
-			errors.push(path + "(Gravity)");
-		}
-
-		this.orbitalFeatures.forEach(feature => {
-			let valid = feature.validate(path);
-			if (typeof valid != "boolean") {
-				errors = errors.concat(valid);
-			}
-		});
-		this.landmasses.forEach(landmass => {
-			let valid = landmass.validate(path);
-			if (typeof valid != "boolean") {
-				errors = errors.concat(valid);
-			}
-		});
-
-		return errors.length ? errors : true;
-	}
 }
 
 // Holds data for a landmass
@@ -194,21 +88,6 @@ export class Landmass {
 	territories: Territory[] = [];
 	
 	constructor() {}
-
-	validate(path: string): boolean | string[] {
-		path = path + '/' + (this.name ? this.name : "Landmass");
-		let errors: string[] = [];
-
-
-		this.territories.forEach(territory => {
-			let valid = territory.validate(path);
-			if (typeof valid != "boolean") {
-				errors = errors.concat(valid);
-			}
-		});
-
-		return errors.length ? errors : true;
-	}
 }
 
 // Holds data for a territory
@@ -225,65 +104,187 @@ export class Territory {
 	info?: string;
 
 	constructor() {}
-
-	validate(path: string): boolean | string[] {
-		path = path + '/' + (this.name ? this.name : "Territory");
-		let errors: string[] = [];
-
-		if (!this.terrain) {
-			errors.push(path + "(Terrain)");
-		}
-
-		this.traits.forEach(trait => {
-			let valid = trait.validate(path);
-			if (typeof valid != "boolean") {
-				errors = errors.concat(valid);
-			}
-		});
-		this.landmarks.forEach(landmarks => {
-			let valid = landmarks.validate(path);
-			if (typeof valid != "boolean") {
-				errors = errors.concat(valid);
-			}
-		});
-
-		return errors.length ? errors : true;
-	}
 }
 
 export class Trait {
 	type?: string;
 	info?: string;
 	constructor() {}
-	validate(path: string): boolean | string[] {
-		path = path + '/' + (this.type ? this.type : "Trait");
-		let errors: string[] = [];
-
-		if (!this.type) {
-			errors.push(path + "(Trait)");
-		}
-		if (!this.info) {
-			errors.push(path + "(Info)");
-		}
-
-		return errors.length ? errors : true;
-	}
 }
 export class Landmark {
 	type?: string;
 	info?: string;
 	constructor() {}
-	validate(path: string): boolean | string[] {
-		path = path + '/' + (this.type ? this.type : "Landmark");
-		let errors: string[] = [];
+}
 
-		if (!this.type) {
-			errors.push(path + "(Landmark)");
-		}
-		if (!this.info) {
-			errors.push(path + "(Info)");
-		}
+export function validate(system: StarSystem): boolean | string[] {
+	let errors: string[] = [];
+	let path: string = system.name ? system.name : "System";
 
-		return errors.length ? errors : true;
+	if (!system.name) {
+		errors.push("System(Name)");
 	}
+
+	system.stars.forEach(star => {
+		let valid = validateStar(star, path);
+		if (typeof valid != "boolean") {
+			errors = errors.concat(valid);
+		}
+	});
+	system.elements.forEach(element => {
+		let valid = validateElement(element, path);
+		if (typeof valid != "boolean") {
+			errors = errors.concat(valid);
+		}
+	});
+
+	return errors.length ? errors : true;
+}
+
+function validateStar(star: Star, path: string): boolean | string[] {
+	path = path + '/' + (star.name ? star.name : "Star");
+	let errors: string[] = [];
+
+	if (!star.name) {
+		errors.push(path + "(Name)");
+	}
+	if (!star.type) {
+		errors.push(path + "(Type)");
+	}
+
+	return errors.length ? errors : true;
+}
+function validateElement(element: SystemElement, path: string): boolean | string[] {
+	path = path + '/' + (element.name ? element.name : element.type ? element.type : "System_Element");
+	let errors: string[] = [];
+
+	if (!element.type) {
+		errors.push(path + "(Type)");
+	}
+	if (!element.zone) {
+		errors.push(path + "(Zone)");
+	}
+
+	element.resources.forEach(resource => {
+		let valid = validateResource(resource, path);
+		if (typeof valid != "boolean") {
+			errors = errors.concat(valid);
+		}
+	});
+	if (element.planet) {
+		let valid = validatePlanet(element.planet, path);
+		if (typeof valid != "boolean") {
+			errors = errors.concat(valid);
+		}
+	}
+
+	return errors.length ? errors : true;
+}
+
+function validateResource(resource: Resource, path: string): boolean | string[] {
+	path = path + '/' + (resource.type ? resource.type : "Resource");
+	let errors: string[] = [];
+
+	if (!resource.type) {
+		errors.push(path + "(Type)");
+	}
+	if (!resource.quantity) {
+		errors.push(path + "(Quantity)");
+	}
+
+	return errors.length ? errors : true;
+}
+
+function validatePlanet(planet: Planet, path: string): boolean | string[] {
+	path = path + '/' + ("Planet");
+	let errors: string[] = [];
+
+	if (!planet.body) {
+		errors.push(path + "(Body)");
+	}
+	if (!planet.gravity) {
+		errors.push(path + "(Gravity)");
+	}
+
+	planet.orbitalFeatures.forEach(feature => {
+		let valid = validateElement(feature, path);
+		if (typeof valid != "boolean") {
+			errors = errors.concat(valid);
+		}
+	});
+	planet.landmasses.forEach(landmass => {
+		let valid = validateLandmass(landmass, path);
+		if (typeof valid != "boolean") {
+			errors = errors.concat(valid);
+		}
+	});
+
+	return errors.length ? errors : true;
+}
+
+function validateLandmass(landmass: Landmass, path: string): boolean | string[] {
+	path = path + '/' + (landmass.name ? landmass.name : "Landmass");
+	let errors: string[] = [];
+
+
+	landmass.territories.forEach(territory => {
+		let valid = validateTerritory(territory, path);
+		if (typeof valid != "boolean") {
+			errors = errors.concat(valid);
+		}
+	});
+
+	return errors.length ? errors : true;
+}
+
+function validateTerritory(territory: Territory, path: string): boolean | string[] {
+	path = path + '/' + (territory.name ? territory.name : "Territory");
+	let errors: string[] = [];
+
+	if (!territory.terrain) {
+		errors.push(path + "(Terrain)");
+	}
+
+	territory.traits.forEach(trait => {
+		let valid = validateTrait(trait, path);
+		if (typeof valid != "boolean") {
+			errors = errors.concat(valid);
+		}
+	});
+	territory.landmarks.forEach(landmark => {
+		let valid = validateLandmark(landmark, path);
+		if (typeof valid != "boolean") {
+			errors = errors.concat(valid);
+		}
+	});
+
+	return errors.length ? errors : true;
+}
+
+function validateTrait(trait: Trait, path: string): boolean | string[] {
+	path = path + '/' + (trait.type ? trait.type : "Trait");
+	let errors: string[] = [];
+
+	if (!trait.type) {
+		errors.push(path + "(Trait)");
+	}
+	if (!trait.info) {
+		errors.push(path + "(Info)");
+	}
+
+	return errors.length ? errors : true;
+}
+
+function validateLandmark(landmark: Landmark, path: string): boolean | string[] {
+	path = path + '/' + (landmark.type ? landmark.type : "Landmark");
+	let errors: string[] = [];
+
+	if (!landmark.type) {
+		errors.push(path + "(Landmark)");
+	}
+	if (!landmark.info) {
+		errors.push(path + "(Info)");
+	}
+
+	return errors.length ? errors : true;
 }
