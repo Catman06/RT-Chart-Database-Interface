@@ -66,20 +66,27 @@ async function saveSystem(event: Event) {
 	// Check if the system is already in the database via ID
 	let exists = false;
 	try {
-		(await fetch(`https://zipperserver.duckdns.org/php/systemGetLists.php?col=id&query=${SystemID.value}`)).json().then((response) => {
-			if (response.length > 0) {
-				exists = true;
-			}
-		})
+		let response = (await fetch(`https://zipperserver.duckdns.org/php/systemGetLists.php?col=id&query=${SystemID.value}`)).json()
+		if ((await response).length > 0) {
+			exists = true;
+		}
 	} catch (error) {
 		console.error("Failed to retrieve IDs in the database", error);
 	}
 
+	console.log(exists);
+	if (exists) {
+		await fetch("https://zipperserver.duckdns.org/php/systemUpdateSystem.php", {
+			method: "POST",
+			body: JSON.stringify({"id" : SystemID.value, "system" : System.value }),
+		});
+	} else {
+		// await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
+		// 		method: "POST",
+		// 		body: JSON.stringify(System.value),
+		// });
+	}
 
-	// await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
-	// 		method: "POST",
-	// 		body: JSON.stringify(System.value),
-	// 	})
 }
 </script>
 
