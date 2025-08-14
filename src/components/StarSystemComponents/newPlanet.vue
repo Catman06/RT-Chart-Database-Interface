@@ -8,9 +8,9 @@ const element = defineModel({ type: Object as PropType<SystemElement>, required:
 const planet = ref(element.value.planet ? element.value.planet : element.value.planet = new Planet);
 
 const elementKeys: Ref<number[]> = ref([]);
-for (let i = 0; i < planet.value.orbitalFeatures.length; i++) {
-	addElement();
-}
+planet.value.orbitalFeatures.forEach(() => {
+	elementKeys.value.push(elementKeys.value.length);
+});
 
 function addElement() {
 	let index = elementKeys.value.length;
@@ -32,9 +32,9 @@ async function deleteElement(elementKey: number) {
 }
 
 const landmassKeys: Ref<number[]> = ref([]);
-for (let i = 0; i < planet.value.landmasses.length; i++) {
-	addLandmass();
-}
+planet.value.landmasses.forEach(() => {
+	landmassKeys.value.push(elementKeys.value.length);
+});
 function addLandmass() {
 	let index = landmassKeys.value.length;
 	while (landmassKeys.value.includes(index)) { index++ };

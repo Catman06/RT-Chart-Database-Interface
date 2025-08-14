@@ -20,7 +20,6 @@ const mode: Ref<string | undefined> = ref();
 				<span class="mark"></span>
 			</label>
 	</div>
-	<button @click="console.log(System, SystemID)">Print</button>
 <NewSystem v-if="mode == 'edit'" v-model:system="System" v-model:id="SystemID" />
 <SystemDisplay v-if="mode == 'show'" v-model:system="System" v-model:id="SystemID" />
 </template>

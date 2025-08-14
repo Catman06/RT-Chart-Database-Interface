@@ -7,9 +7,9 @@ const landmass = defineModel({ type: Object as PropType<Landmass>, required: tru
 
 const territoriesModalOpen = ref(false);
 const territoryKeys: Ref<number[]> = ref([]);
-for (let i = 0; i < landmass.value.territories.length; i++) {
-	addTerritory();
-}
+landmass.value.territories.forEach(() => {
+	territoryKeys.value.push(territoryKeys.value.length);
+});
 
 function addTerritory() {
 	let index = territoryKeys.value.length;

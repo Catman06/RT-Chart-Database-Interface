@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, type PropType } from 'vue';
 import { StarSystem } from '../../StarSystem';
+import DisplayElement from './displayElement.vue';
 
 const SystemID = defineModel('id', { type: Number });
 const SystemIn = defineModel('system', { type: Object as PropType<StarSystem> });
@@ -27,14 +28,20 @@ onMounted(async () => {
 
 <template>
 	<div>
-		<h1>{{ System.name ? System.name : "System" }}</h1>
+		<h1 class="title">{{ System.name ? System.name : "System" }}</h1>
 		<button id="changeButton" @click="changeModal = true">Change</button>
 	</div>
-	<h2>Star{{ System.stars.length > 1 ? "s" : "" }}</h2>
-	<div class="star" v-for="star in System.stars">
-		<p>Name: {{ star.name ? star.name : "Undefined" }}</p>
-		<p>Type: {{ star.type ? star.type : "Undefined" }}</p>
-		<p v-if="star.info">Info: {{ star.info }}</p>
+	<h2 class="subtitle">Star{{ System.stars.length > 1 ? "s" : "" }}</h2>
+	<div class="contentHolder">
+		<div class="star content" v-for="star in System.stars">
+			<p>Name: {{ star.name ? star.name : "Undefined" }}</p>
+			<p>Type: {{ star.type ? star.type : "Undefined" }}</p>
+			<pre v-if="star.info">Info: {{ star.info }}</pre>
+		</div>
+	</div>
+	<h2>System Element{{ System.elements.length > 1 ? "s" : "" }}</h2>
+	<div class="contentHolder">
+		<DisplayElement class="wide content" v-for="element in System.elements" :element="element" />
 	</div>
 	<Teleport to="#content">
 		<div class="modal" v-if="changeModal">
@@ -54,13 +61,43 @@ onMounted(async () => {
 	</Teleport>
 </template>
 
-<style lang="css" scoped>
-	h1 {
+<style lang="css">
+	.title {
 		display: inline;
 		font-size: xx-large;
 	}
 
-	h2 {
+	.subtitle {
 		font-size: x-large;
+	}
+	
+	.contentHolder {
+		display: flex;
+		flex-wrap: wrap;
+		
+		& p, pre {
+			margin:auto;
+			padding: 0 .5rem;
+			white-space: pre-wrap;
+		}
+		& p:nth-child(2n) {
+			background-color: var(--lighter_background);
+		}
+		
+		pre {
+			font: inherit;
+		}
+		
+		& .content {
+			width: fit-content;
+			max-width: 95%;
+			margin: auto;
+			border: 2px solid var(--line_color);
+			padding: .5rem 0;
+			background-color: var(--light_background);
+		}
+		& .wide.content {
+			width: 95%;
+		}
 	}
 </style>

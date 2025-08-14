@@ -83,6 +83,7 @@ textarea {
   background-color: var(--light_background);
   border: 2px solid var(--line_color);
   resize: none;
+  white-space: pre-wrap;
 }
 
 #filter {

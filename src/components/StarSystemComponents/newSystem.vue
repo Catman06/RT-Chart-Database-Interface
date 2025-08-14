@@ -114,7 +114,7 @@ async function saveSystem(event: Event) {
 					</div>
 					<div class="starInfo">
 						<label :for="'starInfo' + starKey">Info</label>
-						<textarea :name="'starInfo' + starKey"></textarea>
+						<textarea :name="'starInfo' + starKey" v-model="System.stars[getStarIndex(starKey)].info"></textarea>
 					</div>
 				</div>
 			</template>

@@ -8,9 +8,9 @@ const element = defineModel({ type: Object as PropType<SystemElement>, required:
 
 const resourceModalOpen = ref(false);
 const resourceKeys: Ref<number[]> = ref([]);
-for (let i = 0; i < element.value.resources.length; i++) {
-	addResource();
-}
+element.value.resources.forEach(() => {
+	resourceKeys.value.push(resourceKeys.value.length);
+});
 const planetModalOpen = ref(false);
 
 function addResource() {
