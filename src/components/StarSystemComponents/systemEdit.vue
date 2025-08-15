@@ -81,18 +81,22 @@ async function saveSystem(event: Event) {
 			body: JSON.stringify({"id" : SystemID.value, "system" : System.value }),
 		});
 	} else {
-		// await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
-		// 		method: "POST",
-		// 		body: JSON.stringify(System.value),
-		// });
+		await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
+				method: "POST",
+				body: JSON.stringify(System.value),
+		});
 	}
+}
 
+const dialogDelete = ref(false);
+async function deleteSystem() {
+	await fetch(`https://zipperserver.duckdns.org/php/systemDeleteSystem.php?id=${SystemID.value}`);
 }
 </script>
 
 <template>
-	<button @click="() => console.log(System)">Print</button>
 	<button form="newSystemForm">Save</button>
+	<button @click="dialogDelete = true">Delete</button>
 	<form id="newSystemForm" @submit="saveSystem">
 		<label class="bold big">System</label>
 		<label for="systemName">System Name
@@ -138,6 +142,15 @@ async function saveSystem(event: Event) {
 				<p>Do you really want to delete {{  System.elements[getElementIndex(dialogElementKey)].name ? System.elements[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</p>
 				<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
 				<button @click="dialogElementKey = undefined">No</button>
+			</div>
+		</div>
+	</Teleport>
+	<Teleport to="#content">
+		<div class="confirmDialog" v-if="dialogDelete">
+			<div class="dialogContent">
+				<p>Do you really want to delete {{ System.name ? System.name : "System" }}?</p>
+				<button @click="dialogDelete = false; deleteSystem();">Yes</button>
+				<button @click="dialogDelete = false">No</button>
 			</div>
 		</div>
 	</Teleport>

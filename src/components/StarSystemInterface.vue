@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, type Ref } from 'vue';
 import SystemDisplay from './StarSystemComponents/systemDisplay.vue';
-import NewSystem from './StarSystemComponents/newSystem.vue';
+import NewSystem from './StarSystemComponents/systemEdit.vue';
 import type { StarSystem } from '../StarSystem';
 
 const System: Ref<StarSystem | undefined> = ref();
