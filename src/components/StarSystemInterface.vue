@@ -10,6 +10,10 @@ const mode: Ref<string | undefined> = ref();
 </script>
 
 <template>
+	<div id="loginText">
+		<p>// IDENTITY VERIFIED</p>
+		<p>// SYSTEM DISPLAY ACCESS GRANTED</p>
+	</div>
 	<div id="modeSelect">
 		<label for="showRadio">Display Mode
 			<input id="showRadio" type="radio" name="mode" value="show" v-model="mode" />

@@ -36,8 +36,6 @@ body {
 #loginText {
   line-height: 1;
 	text-align: left;
-	position: fixed;
-	top: 0;
 }
 
 button {
