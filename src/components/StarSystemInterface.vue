@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, type Ref } from 'vue';
 import SystemDisplay from './StarSystemComponents/systemDisplay.vue';
-import NewSystem from './StarSystemComponents/systemEdit.vue';
+import SystemEdit from './StarSystemComponents/systemEdit.vue';
 import type { StarSystem } from '../StarSystem';
 
 const System: Ref<StarSystem | undefined> = ref();
@@ -24,7 +24,7 @@ const mode: Ref<string | undefined> = ref("show");
 				<span class="mark"></span>
 			</label>
 	</div>
-<NewSystem v-if="mode == 'edit'" v-model:system="System" v-model:id="SystemID" />
+<SystemEdit v-if="mode == 'edit'" v-model:system="System" v-model:id="SystemID" />
 <SystemDisplay v-if="mode == 'show'" v-model:system="System" v-model:id="SystemID" />
 </template>
 

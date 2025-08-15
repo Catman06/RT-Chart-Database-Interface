@@ -268,9 +268,6 @@ function validateTrait(trait: Trait, path: string): boolean | string[] {
 	if (!trait.type) {
 		errors.push(path + "(Trait)");
 	}
-	if (!trait.info) {
-		errors.push(path + "(Info)");
-	}
 
 	return errors.length ? errors : true;
 }
@@ -281,9 +278,6 @@ function validateLandmark(landmark: Landmark, path: string): boolean | string[] 
 
 	if (!landmark.type) {
 		errors.push(path + "(Landmark)");
-	}
-	if (!landmark.info) {
-		errors.push(path + "(Info)");
 	}
 
 	return errors.length ? errors : true;

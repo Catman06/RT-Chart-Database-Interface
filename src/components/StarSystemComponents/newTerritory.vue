@@ -5,9 +5,9 @@ import { Landmark, Territory, Trait } from '../../StarSystem';
 const territory = defineModel({ type: Object as PropType<Territory>, required: true});
 
 const traitKeys: Ref<number[]> = ref([]);
-for (let i = 0; i < territory.value.traits.length; i++) {
-	addTrait();
-}
+territory.value.traits.forEach(() => {
+	traitKeys.value.push(traitKeys.value.length);
+});
 
 function addTrait() {
 	let index = traitKeys.value.length;
@@ -25,9 +25,9 @@ function deleteTrait(traitKey: number) {
 }
 
 const landmarkKeys: Ref<number[]> = ref([]);
-for (let i = 0; i < territory.value.landmarks.length; i++) {
-	addLandmark();
-}
+territory.value.landmarks.forEach(() => {
+	landmarkKeys.value.push(landmarkKeys.value.length);
+});
 
 function addLandmark() {
 	let index = landmarkKeys.value.length;
