@@ -52,6 +52,7 @@ onMounted(async () => {
 					System = returned;
 					SystemIn = returned;
 					SystemID = system.id; 
+					changeModal = false;
 					}">
 					<p>ID: {{ system.id }}</p>
 					<p>Name: {{ system.name }}</p>
