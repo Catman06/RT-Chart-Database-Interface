@@ -6,7 +6,7 @@ import type { StarSystem } from '../StarSystem';
 
 const System: Ref<StarSystem | undefined> = ref();
 const SystemID: Ref<number | undefined> = ref();
-const mode: Ref<string | undefined> = ref();
+const mode: Ref<string | undefined> = ref("show");
 </script>
 
 <template>
