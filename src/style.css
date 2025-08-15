@@ -19,6 +19,8 @@
   --light_background: #1a241d;
   --lighter_background: #2c3d31;
   --frame_color: #998653;
+
+  --nav_height: 4.4rem;
 }
 
 body {
@@ -89,7 +91,7 @@ textarea {
   top: 0;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 4.4rem);
+  height: calc(100vh - var(--nav_height));
   align-content: center;
   filter: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"> \
   <filter id="glitch" x="0%" y="0%" width="100%" height="300%"> \
@@ -106,5 +108,5 @@ textarea {
 
 #content {
   overflow: auto;
-  height: calc(100vh - 4.4rem);
+  height: calc(100vh - var(--nav_height));
 }

@@ -13,7 +13,7 @@
 <style lang="css" scoped>
 img {
 	max-height: calc(90vh - 7rem);
-	margin-top: 4rem;
+	margin-top: 1rem;
 	max-width: 75vw;
 }
 </style>

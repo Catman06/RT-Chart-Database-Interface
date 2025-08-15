@@ -219,7 +219,7 @@ async function deleteSystem() {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: calc(100% - 4.4rem);
+	height: calc(100% - var(--nav_height));
 	display: flex;
 	justify-content: center;
 	align-items: center;

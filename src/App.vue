@@ -25,6 +25,20 @@ function switchTab(num: number) {
     }
   }
 }
+
+onMounted(() => {
+  const rootElement: HTMLElement | null = document.querySelector(':root');
+  const observer = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      if (rootElement) {
+        rootElement.style.setProperty('--nav_height', entry.borderBoxSize[0].blockSize + 'px');
+      }
+    }
+  });
+  const navElement: HTMLElement | null = document.querySelector('#navbar');
+  if (navElement)
+    observer.observe(navElement, { box: 'border-box'});
+})
 </script>
 
 <template>
@@ -60,15 +74,16 @@ function switchTab(num: number) {
   border: .4rem outset #68675c;
   border-bottom-style: none;
   width: calc(100% - .8rem);
-  height: 4rem;
 
   & img {
     margin-right: auto;
     padding: .40rem;
+    height: 3.2rem;
   }
 }
 #navTabHolder {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   border: .2rem inset #68675c;
   margin: auto;
