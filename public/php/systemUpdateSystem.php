@@ -5,8 +5,6 @@ function exception_handler(Throwable $ex) {
 	exit(1);
 }
 
-$response = [];
-
 // Create a connection to the db
 try {
 	$dbh = new PDO('pgsql:host=localhost;port=5432;dbname=valentine_dynasty;user=valentine');
@@ -15,18 +13,17 @@ try {
 	throw new Exception("Connection failed: " . $ex, 1);
 }
 
+// Parse POSTed info into the id and system
+$post = json_decode(file_get_contents('php://input'));
+$id = $post->id;
+$system = $post->system;
+
 // Add the provided info to the database
 try {
 	$dbh->beginTransaction();
-	$stmt = $dbh->prepare('INSERT INTO charts (start, endpoint, quality, astronomican, rules, maker, duration, stability) VALUES (?,?,?,?,?,?,?,?)');
-	$stmt->bindParam(1, $_POST['start']);
-	$stmt->bindParam(2, $_POST['endpoint']);
-	$stmt->bindParam(3, $_POST['quality']);
-	$stmt->bindParam(4, $_POST['astronomican']);
-	$stmt->bindParam(5, $_POST['rules']);
-	$stmt->bindParam(6, $_POST['maker']);
-	$stmt->bindParam(7, $_POST['duration']);
-	$stmt->bindParam(8, $_POST['stability']);
+	$stmt = $dbh->prepare('UPDATE systems SET system = ? WHERE id = ?');
+	$stmt->bindParam(1, json_encode($system));
+	$stmt->bindParam(2, $id);
 	$stmt->execute();
 	$dbh->commit();
 } catch (Exception $ex) {
@@ -34,6 +31,5 @@ try {
 	throw new Exception("Failed to add to database: " . $ex, 1);
 }
 
-// return all locations
-echo json_encode($response);
+echo json_encode("Updated database");
 ?>

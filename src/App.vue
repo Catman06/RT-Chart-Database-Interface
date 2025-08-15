@@ -3,6 +3,7 @@ import { onMounted, ref, type Ref } from 'vue';
 import ChartInterface from './components/ChartInterface.vue';
 import LandingPage from './components/LandingPage.vue';
 import ArchivePage from './components/ArchivePage.vue';
+import StarSystemInterface from './components/StarSystemInterface.vue';
 
 onMounted(async () => {
   // Hide the praise of the machine god once the page fully loads
@@ -24,13 +25,30 @@ function switchTab(num: number) {
     }
   }
 }
+
+onMounted(() => {
+  const rootElement: HTMLElement | null = document.querySelector(':root');
+  const observer = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      if (rootElement) {
+        rootElement.style.setProperty('--nav_height', entry.borderBoxSize[0].blockSize + 'px');
+      }
+    }
+  });
+  const navElement: HTMLElement | null = document.querySelector('#navbar');
+  if (navElement)
+    observer.observe(navElement, { box: 'border-box'});
+})
 </script>
 
 <template>
-  <div id="content">
-    <LandingPage v-if="tab == 0" />
-    <ChartInterface v-else-if="tab == 1" />
-    <ArchivePage v-else-if="tab == 2" />
+  <div id="filter">
+    <div id="content">
+      <LandingPage v-if="tab == 0" />
+      <ChartInterface v-else-if="tab == 1" />
+      <ArchivePage v-else-if="tab == 2" />
+      <StarSystemInterface v-else-if="tab == 3" />
+    </div>
   </div>
 
   <div id="navbar">
@@ -39,6 +57,7 @@ function switchTab(num: number) {
       <p class="navTabs" @click="switchTab(0)">Home</p>
       <p class="navTabs" @click="switchTab(1)">Charts</p>
       <p class="navTabs" @click="switchTab(2)">Archive</p>
+      <p class="navTabs" @click="switchTab(3)">Systems</p>
     </div>
   </div>
 </template>
@@ -55,15 +74,16 @@ function switchTab(num: number) {
   border: .4rem outset #68675c;
   border-bottom-style: none;
   width: calc(100% - .8rem);
-  height: 4rem;
 
   & img {
     margin-right: auto;
     padding: .40rem;
+    height: 3.2rem;
   }
 }
 #navTabHolder {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   border: .2rem inset #68675c;
   margin: auto;
