@@ -71,6 +71,10 @@ onMounted(async () => {
 	.subtitle {
 		font-size: x-large;
 	}
+
+	.name {
+		font-size: larger;
+	}
 	
 	.contentHolder {
 		display: flex;
@@ -84,6 +88,10 @@ onMounted(async () => {
 		& p:nth-child(2n) {
 			background-color: var(--lighter_background);
 		}
+
+		& .hoverable:hover {
+			background-color: hsl(from var(--lighter_background) h calc(s - 5) calc(l + 10));
+		}
 		
 		pre {
 			font: inherit;
@@ -92,13 +100,14 @@ onMounted(async () => {
 		& .content {
 			width: fit-content;
 			max-width: 95%;
-			margin: auto;
+			margin: .25rem auto;
 			border: 2px solid var(--line_color);
-			padding: .5rem 0;
+			padding: 0 0 .5rem 0;
 			background-color: var(--light_background);
 		}
 		& .wide.content {
 			width: 95%;
 		}
 	}
+
 </style>
