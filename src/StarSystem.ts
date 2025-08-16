@@ -119,7 +119,8 @@ export class Landmark {
 	constructor() {}
 }
 
-export function validate(system: StarSystem): boolean | string[] {
+// Functions for the validation of the star system
+export function validate(system: StarSystem): string[] {
 	let errors: string[] = [];
 	let path: string = system.name ? system.name : "System";
 
@@ -144,10 +145,10 @@ export function validate(system: StarSystem): boolean | string[] {
 		return a.order - b.order;
 	});
 
-	return errors.length ? errors : true;
+	return errors;
 }
 
-function validateStar(star: Star, path: string): boolean | string[] {
+function validateStar(star: Star, path: string): string[] {
 	path = path + '/' + (star.name ? star.name : "Star");
 	let errors: string[] = [];
 
@@ -158,9 +159,9 @@ function validateStar(star: Star, path: string): boolean | string[] {
 		errors.push(path + "(Type)");
 	}
 
-	return errors.length ? errors : true;
+	return errors;
 }
-function validateElement(element: SystemElement, path: string): boolean | string[] {
+function validateElement(element: SystemElement, path: string): string[] {
 	path = path + '/' + (element.name ? element.name : element.type ? element.type : "System_Element");
 	let errors: string[] = [];
 
@@ -187,10 +188,10 @@ function validateElement(element: SystemElement, path: string): boolean | string
 		}
 	}
 
-	return errors.length ? errors : true;
+	return errors;
 }
 
-function validateResource(resource: Resource, path: string): boolean | string[] {
+function validateResource(resource: Resource, path: string): string[] {
 	path = path + '/' + (resource.type ? resource.type : "Resource");
 	let errors: string[] = [];
 
@@ -201,10 +202,10 @@ function validateResource(resource: Resource, path: string): boolean | string[] 
 		errors.push(path + "(Quantity)");
 	}
 
-	return errors.length ? errors : true;
+	return errors;
 }
 
-function validatePlanet(planet: Planet, path: string): boolean | string[] {
+function validatePlanet(planet: Planet, path: string): string[] {
 	path = path + '/' + ("Planet");
 	let errors: string[] = [];
 
@@ -232,10 +233,10 @@ function validatePlanet(planet: Planet, path: string): boolean | string[] {
 		}
 	});
 
-	return errors.length ? errors : true;
+	return errors;
 }
 
-function validateLandmass(landmass: Landmass, path: string): boolean | string[] {
+function validateLandmass(landmass: Landmass, path: string): string[] {
 	path = path + '/' + (landmass.name ? landmass.name : "Landmass");
 	let errors: string[] = [];
 
@@ -247,10 +248,10 @@ function validateLandmass(landmass: Landmass, path: string): boolean | string[] 
 		}
 	});
 
-	return errors.length ? errors : true;
+	return errors;
 }
 
-function validateTerritory(territory: Territory, path: string): boolean | string[] {
+function validateTerritory(territory: Territory, path: string): string[] {
 	path = path + '/' + (territory.name ? territory.name : "Territory");
 	let errors: string[] = [];
 
@@ -271,10 +272,10 @@ function validateTerritory(territory: Territory, path: string): boolean | string
 		}
 	});
 
-	return errors.length ? errors : true;
+	return errors;
 }
 
-function validateTrait(trait: Trait, path: string): boolean | string[] {
+function validateTrait(trait: Trait, path: string): string[] {
 	path = path + '/' + (trait.type ? trait.type : "Trait");
 	let errors: string[] = [];
 
@@ -282,10 +283,10 @@ function validateTrait(trait: Trait, path: string): boolean | string[] {
 		errors.push(path + "(Trait)");
 	}
 
-	return errors.length ? errors : true;
+	return errors;
 }
 
-function validateLandmark(landmark: Landmark, path: string): boolean | string[] {
+function validateLandmark(landmark: Landmark, path: string): string[] {
 	path = path + '/' + (landmark.type ? landmark.type : "Landmark");
 	let errors: string[] = [];
 
@@ -293,5 +294,5 @@ function validateLandmark(landmark: Landmark, path: string): boolean | string[] 
 		errors.push(path + "(Landmark)");
 	}
 
-	return errors.length ? errors : true;
+	return errors;
 }

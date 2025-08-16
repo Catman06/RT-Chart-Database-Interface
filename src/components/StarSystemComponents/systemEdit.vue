@@ -53,40 +53,60 @@ async function deleteElement(elementKey: number) {
 }
 
 // Validate and, if valid, save the entered system to the database
+const dialogSave: Ref<string[] | string | undefined> = ref();
 async function saveSystem(event: Event) {
 	event.preventDefault();
 	console.log("Validating system");
 	let valid = validate(System.value);
 
-	if (typeof valid != 'boolean') {
+	if (valid.length > 0) {
 		console.error("System not valid", valid);
+		dialogSave.value = valid;
 		return;
 	}
 
 	console.log("Saving system");
 	// Check if the system is already in the database via ID
-	let exists = false;
+	let exists = true;
 	try {
 		let response = (await fetch(`https://zipperserver.duckdns.org/php/systemGetLists.php?col=id&query=${SystemID.value}`)).json()
-		if ((await response).length > 0) {
-			exists = true;
+		if ((await response).length = 0) {
+			exists = false;
 		}
 	} catch (error) {
 		console.error("Failed to retrieve IDs in the database", error);
+		dialogSave.value = ["Failed to retrieve IDs from the database"];
 	}
-
+	
 	console.log(exists);
+	let savePromise: Promise<Response>;
 	if (exists) {
-		await fetch("https://zipperserver.duckdns.org/php/systemUpdateSystem.php", {
-			method: "POST",
-			body: JSON.stringify({"id" : SystemID.value, "system" : System.value }),
-		});
+		try {
+			savePromise = fetch("https://zipperserver.duckdns.org/php/systemUpdateSystem.php", {
+				method: "POST",
+				body: JSON.stringify({"id" : SystemID.value, "system" : System.value }),
+			});
+		} catch (error) {
+			console.error("Failed to update the system in the database", error);
+			dialogSave.value = ["Failed to update the system in the database"];
+			return;
+		}
 	} else {
-		await fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
+		try {
+			savePromise = fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
 				method: "POST",
 				body: JSON.stringify(System.value),
-		});
+			});			
+		} catch (error) {
+			console.error("Failed to save the new system to the database", error);
+			dialogSave.value = ["Failed to save the new system to the database"];
+			return;
+		}
 	}
+	if ((await savePromise).status == 200) {
+		dialogSave.value = "success";
+	}
+
 }
 
 const dialogDelete = ref(false);
@@ -147,6 +167,17 @@ async function deleteSystem() {
 		<p>Do you really want to delete {{ System.name ? System.name : "System" }}?</p>
 		<button @click="dialogDelete = false; deleteSystem();">Yes</button>
 		<button @click="dialogDelete = false">No</button>
+	</ModalDialog>
+	<ModalDialog v-if="dialogSave != undefined">
+		<template v-if="dialogSave == 'success'">
+			<p>System saved to database successfully</p>
+		</template>
+		<template v-else>
+			<p>SYSTEM NOT VALID</p>
+			<p>Issues</p>
+			<p v-for="value in dialogSave">{{ value }}</p>
+		</template>
+		<button @click="dialogSave = undefined">Understood</button>
 	</ModalDialog>
 </template>
 

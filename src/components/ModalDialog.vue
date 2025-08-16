@@ -18,7 +18,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: calc(100% - var(--nav_height));
+	height: calc(100%);
 	display: flex;
 	justify-content: center;
 	align-items: center;
