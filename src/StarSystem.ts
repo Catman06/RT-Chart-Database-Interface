@@ -28,6 +28,8 @@ export class Star {
 export class SystemElement {
 	// The name of the element (if applicable)
 	name?: string;
+	// The number representing the elements place from the star(s)
+	order?: number;
 	// The type of element resource is
 	type?: string;
 	// The zone (Inner Cauldron|Primary Biosphere|Outer Reaches) of this element
@@ -137,6 +139,10 @@ export function validate(system: StarSystem): boolean | string[] {
 			errors = errors.concat(valid);
 		}
 	});
+	system.elements.sort((a,b) => { 
+		if (!a.order || !b.order) { return 0 };
+		return a.order - b.order;
+	});
 
 	return errors.length ? errors : true;
 }
@@ -163,6 +169,9 @@ function validateElement(element: SystemElement, path: string): boolean | string
 	}
 	if (!element.zone) {
 		errors.push(path + "(Zone)");
+	}
+	if (!element.order) {
+		errors.push(path + "(Order)");
 	}
 
 	element.resources.forEach(resource => {
@@ -211,6 +220,10 @@ function validatePlanet(planet: Planet, path: string): boolean | string[] {
 		if (typeof valid != "boolean") {
 			errors = errors.concat(valid);
 		}
+	});
+	planet.orbitalFeatures.sort((a,b) => { 
+		if (!a.order || !b.order) { return 0 };
+		return a.order - b.order;
 	});
 	planet.landmasses.forEach(landmass => {
 		let valid = validateLandmass(landmass, path);
