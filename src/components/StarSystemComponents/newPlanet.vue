@@ -3,6 +3,7 @@ import { ref, type PropType, type Ref } from 'vue';
 import { Landmass, Planet, SystemElement } from '../../StarSystem';
 import NewSystemElement from './newSystemElement.vue';
 import NewLandmass from './newLandmass.vue';
+import ModalDialog from '../ModalDialog.vue';
 
 const element = defineModel({ type: Object as PropType<SystemElement>, required: true});
 const planet = ref(element.value.planet ? element.value.planet : element.value.planet = new Planet);
@@ -96,24 +97,16 @@ async function deleteLandmass(landmassKey: number) {
 	</template>
 </div>
 <button type="button" @click="addLandmass">Add Landmass</button>
-<Teleport to="#content">
-	<div class="confirmDialog" v-if="dialogElementKey != undefined">
-		<div class="dialogContent">
-			<label class="bold">Do you really want to delete {{  planet.orbitalFeatures[getElementIndex(dialogElementKey)].name ? planet.orbitalFeatures[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</label>
-			<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
-			<button @click="dialogElementKey = undefined">No</button>
-		</div>
-	</div>
-</Teleport>
-<Teleport to="#content">
-	<div class="confirmDialog" v-if="dialogLandmassKey != undefined">
-		<div class="dialogContent">
-			<label class="bold">Do you really want to delete {{  planet.landmasses[getLandmassIndex(dialogLandmassKey)].name ? planet.landmasses[getLandmassIndex(dialogLandmassKey)].name : "unnamed landmass" }}?</label>
-			<button @click="deleteLandmass(dialogLandmassKey); dialogLandmassKey = undefined">Yes</button>
-			<button @click="dialogLandmassKey = undefined">No</button>
-		</div>
-	</div>
-</Teleport>
+<ModalDialog v-if="dialogElementKey != undefined">
+	<label class="bold">Do you really want to delete {{  planet.orbitalFeatures[getElementIndex(dialogElementKey)].name ? planet.orbitalFeatures[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</label>
+	<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
+	<button @click="dialogElementKey = undefined">No</button>
+</ModalDialog>
+<ModalDialog v-if="dialogLandmassKey != undefined">
+	<label class="bold">Do you really want to delete {{  planet.landmasses[getLandmassIndex(dialogLandmassKey)].name ? planet.landmasses[getLandmassIndex(dialogLandmassKey)].name : "unnamed landmass" }}?</label>
+	<button @click="deleteLandmass(dialogLandmassKey); dialogLandmassKey = undefined">Yes</button>
+	<button @click="dialogLandmassKey = undefined">No</button>
+</ModalDialog>
 </template>
 
 <style lang="css" scoped>

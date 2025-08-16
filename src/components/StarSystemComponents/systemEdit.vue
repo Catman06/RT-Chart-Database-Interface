@@ -2,6 +2,7 @@
 import { ref, type PropType, type Ref } from 'vue';
 import NewSystemElement from './newSystemElement.vue';
 import { Star, StarSystem, SystemElement, validate } from '../../StarSystem';
+import ModalDialog from '../ModalDialog.vue';
 
 const SystemID = defineModel('id', { type: Number });
 const SystemIn = defineModel('system', { type: Object as PropType<StarSystem> });
@@ -92,6 +93,7 @@ const dialogDelete = ref(false);
 async function deleteSystem() {
 	await fetch(`https://zipperserver.duckdns.org/php/systemDeleteSystem.php?id=${SystemID.value}`);
 }
+
 </script>
 
 <template>
@@ -136,24 +138,16 @@ async function deleteSystem() {
 		</div>
 		<button type="button" class="addButton" @click="addElement">Add Element</button>
 	</form>
-	<Teleport to="#content">
-		<div class="confirmDialog" v-if="dialogElementKey != undefined">
-			<div class="dialogContent">
-				<p>Do you really want to delete {{  System.elements[getElementIndex(dialogElementKey)].name ? System.elements[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</p>
-				<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
-				<button @click="dialogElementKey = undefined">No</button>
-			</div>
-		</div>
-	</Teleport>
-	<Teleport to="#content">
-		<div class="confirmDialog" v-if="dialogDelete">
-			<div class="dialogContent">
-				<p>Do you really want to delete {{ System.name ? System.name : "System" }}?</p>
-				<button @click="dialogDelete = false; deleteSystem();">Yes</button>
-				<button @click="dialogDelete = false">No</button>
-			</div>
-		</div>
-	</Teleport>
+	<ModalDialog v-if="dialogElementKey != undefined">
+		<p>Do you really want to delete {{  System.elements[getElementIndex(dialogElementKey)].name ? System.elements[getElementIndex(dialogElementKey)].name : "unnamed element" }}?</p>
+		<button @click="deleteElement(dialogElementKey); dialogElementKey = undefined">Yes</button>
+		<button @click="dialogElementKey = undefined">No</button>
+	</ModalDialog>
+	<ModalDialog v-if="dialogDelete">
+		<p>Do you really want to delete {{ System.name ? System.name : "System" }}?</p>
+		<button @click="dialogDelete = false; deleteSystem();">Yes</button>
+		<button @click="dialogDelete = false">No</button>
+	</ModalDialog>
 </template>
 
 <style lang="css">
@@ -211,24 +205,6 @@ async function deleteSystem() {
 		&>* {
 			margin: auto;
 		}
-	}
-}
-
-.confirmDialog {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: calc(100% - var(--nav_height));
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: #10101080;
-
-	& .dialogContent {
-		background-color: var(--light_background);
-		border: 2px solid var(--line_color);
-		padding: 1rem;
 	}
 }
 

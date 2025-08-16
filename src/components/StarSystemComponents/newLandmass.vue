@@ -2,6 +2,7 @@
 import { ref, type PropType, type Ref } from 'vue';
 import { Landmass, Territory } from '../../StarSystem';
 import NewTerritory from './newTerritory.vue';
+import ModalDialog from '../ModalDialog.vue';
 
 const landmass = defineModel({ type: Object as PropType<Landmass>, required: true});
 
@@ -55,15 +56,11 @@ function deleteTerritory(territoryKey: number) {
 		</div>
 	</div>
 </Teleport>
-<Teleport to="#content">
-	<div class="confirmDialog" v-if="dialogTerritoryKey != undefined">
-		<div class="dialogContent">
-			<label class="bold">Do you really want to delete {{  landmass.territories[getTerritoryIndex(dialogTerritoryKey)].name ? landmass.territories[getTerritoryIndex(dialogTerritoryKey)].name : "unnamed territory" }}?</label>
-			<button @click="deleteTerritory(dialogTerritoryKey); dialogTerritoryKey = undefined">Yes</button>
-			<button @click="dialogTerritoryKey = undefined">No</button>
-		</div>
-	</div>
-</Teleport>
+<ModalDialog v-if="dialogTerritoryKey != undefined">
+	<label class="bold">Do you really want to delete {{  landmass.territories[getTerritoryIndex(dialogTerritoryKey)].name ? landmass.territories[getTerritoryIndex(dialogTerritoryKey)].name : "unnamed territory" }}?</label>
+	<button @click="deleteTerritory(dialogTerritoryKey); dialogTerritoryKey = undefined">Yes</button>
+	<button @click="dialogTerritoryKey = undefined">No</button>
+</ModalDialog>
 </template>
 
 <style lang="css" scoped>
