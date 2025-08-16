@@ -5,8 +5,7 @@ import { Star, StarSystem, SystemElement, validate } from '../../StarSystem';
 import ModalDialog from '../ModalDialog.vue';
 
 const SystemID = defineModel('id', { type: Number });
-const SystemIn = defineModel('system', { type: Object as PropType<StarSystem> });
-const System: Ref<StarSystem> = ref(SystemIn.value ? SystemIn.value : SystemIn.value = new StarSystem);
+const System = defineModel('system', { type: Object as PropType<StarSystem>, default: new StarSystem });
 
 const starKeys: Ref<number[]> = ref([]);
 const elementKeys: Ref<number[]> = ref([]);
@@ -114,9 +113,16 @@ async function deleteSystem() {
 	await fetch(`https://zipperserver.duckdns.org/php/systemDeleteSystem.php?id=${SystemID.value}`);
 }
 
+const dialogNew = ref(false);
+async function newSystem() {
+	starKeys.value = [];
+	elementKeys.value = [];
+	System.value = new StarSystem;
+}
 </script>
 
 <template>
+	<button @click="dialogNew = true">New System</button>
 	<button form="newSystemForm">Save</button>
 	<button @click="dialogDelete = true">Delete</button>
 	<form id="newSystemForm" @submit="saveSystem">
@@ -164,7 +170,8 @@ async function deleteSystem() {
 		<button @click="dialogElementKey = undefined">No</button>
 	</ModalDialog>
 	<ModalDialog v-if="dialogDelete">
-		<p>Do you really want to delete {{ System.name ? System.name : "System" }}?</p>
+		<p>Do you really want to delete {{ System.name ? System.name : "System" }} from the database?</p>
+		<p>THIS IS UNREVERSABLE</p>
 		<button @click="dialogDelete = false; deleteSystem();">Yes</button>
 		<button @click="dialogDelete = false">No</button>
 	</ModalDialog>
@@ -178,6 +185,12 @@ async function deleteSystem() {
 			<p v-for="value in dialogSave">{{ value }}</p>
 		</template>
 		<button @click="dialogSave = undefined">Understood</button>
+	</ModalDialog>
+	<ModalDialog v-if="dialogNew">
+		<p>Do you really want to create a new system?</p>
+		<p>You will lose any unsaved edits.</p>
+		<button @click="dialogNew = false; newSystem();">Yes</button>
+		<button @click="dialogNew = false">No</button>
 	</ModalDialog>
 </template>
 
