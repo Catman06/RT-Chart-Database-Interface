@@ -252,41 +252,12 @@ async function newSystem() {
 	}
 }
 
-.modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: #10101050;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;	
-	justify-items: center;
-}
-
-.modal>.content {
-	background-color: var(--light_background);
-	border: 2px solid var(--line_color);
-	width: 95%;
-	height: 95%;
-	margin: auto;
-	overflow: auto;
-	filter:blur(0px);
-}
-
-.closeButton {
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin: 0;
-}
-
-& label.bold {
+label.bold {
 	font-weight: bold;
 	margin: .5rem;
 }
 
-& label.big {
+label.big {
 	font-size: 1.25rem;
 	display: block;
 }

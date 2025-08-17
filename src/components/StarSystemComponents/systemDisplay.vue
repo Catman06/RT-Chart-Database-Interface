@@ -2,12 +2,12 @@
 import { onMounted, ref, type PropType } from 'vue';
 import { StarSystem } from '../../StarSystem';
 import DisplayElement from './displayElement.vue';
+import ModalFull from '../ModalFull.vue';
 
 const SystemID = defineModel('id', { type: Number });
-const SystemIn = defineModel('system', { type: Object as PropType<StarSystem> });
-const System = ref(SystemIn.value ? SystemIn.value : SystemIn.value = new StarSystem);
+const System = defineModel('system', { type: Object as PropType<StarSystem>, default: new StarSystem });
 
-const changeModal = ref(false);
+const changeModalOpen = ref(false);
 
 const SystemNames = ref();
 async function getSystemNames() {
@@ -29,7 +29,7 @@ onMounted(async () => {
 <template>
 	<div>
 		<h1 class="title">{{ System.name ? System.name : "System" }}</h1>
-		<button id="changeButton" @click="changeModal = true">Change</button>
+		<button id="changeButton" @click="changeModalOpen = true">Change</button>
 	</div>
 	<h2 class="subtitle">Info</h2>
 	<pre class="sysInfo" v-if="System.info">{{ System.info }}</pre>
@@ -45,23 +45,17 @@ onMounted(async () => {
 	<div class="contentHolder">
 		<DisplayElement class="wide content" v-for="element in System.elements" :element="element" />
 	</div>
-	<Teleport to="#content">
-		<div class="modal" v-if="changeModal">
-			<div class="content">
-				<button class="closeButton" type="button" @click="changeModal = false">X</button>
-				<button v-for="system in SystemNames" @click="async () => { 
-					let returned: StarSystem = await getSystemFromID(system.id);
-					System = returned;
-					SystemIn = returned;
-					SystemID = system.id; 
-					changeModal = false;
-					}">
+	<ModalFull v-if="changeModalOpen" @close-pressed="changeModalOpen = false">
+		<button v-for="system in SystemNames" @click="async () => { 
+			let returned: StarSystem = await getSystemFromID(system.id);
+			System = returned;
+			SystemID = system.id; 
+			changeModalOpen = false;
+		}">
 					<p>ID: {{ system.id }}</p>
 					<p>Name: {{ system.name }}</p>
 				</button>
-			</div>
-		</div>
-	</Teleport>
+	</ModalFull>
 </template>
 
 <style lang="css">
