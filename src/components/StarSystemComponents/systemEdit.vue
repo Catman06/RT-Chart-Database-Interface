@@ -5,7 +5,8 @@ import { Star, StarSystem, SystemElement, validate } from '../../StarSystem';
 import ModalDialog from '../ModalDialog.vue';
 
 const SystemID = defineModel('id', { type: Number });
-const System = defineModel('system', { type: Object as PropType<StarSystem>, default: new StarSystem });
+const SystemIn = defineModel('system', { type: Object as PropType<StarSystem> });
+const System = ref(SystemIn.value ? SystemIn.value : SystemIn.value = new StarSystem);
 
 const starKeys: Ref<number[]> = ref([]);
 const elementKeys: Ref<number[]> = ref([]);
