@@ -31,6 +31,8 @@ onMounted(async () => {
 		<h1 class="title">{{ System.name ? System.name : "System" }}</h1>
 		<button id="changeButton" @click="changeModal = true">Change</button>
 	</div>
+	<h2 class="subtitle">Info</h2>
+	<pre class="sysInfo" v-if="System.info">{{ System.info }}</pre>
 	<h2 class="subtitle">Star{{ System.stars.length > 1 ? "s" : "" }}</h2>
 	<div class="contentHolder">
 		<div class="star content" v-for="star in System.stars">
@@ -76,6 +78,14 @@ onMounted(async () => {
 		font-size: larger;
 	}
 	
+	.sysInfo {
+		border: 2px solid var(--line_color);
+		margin: auto;
+		padding: 0 .5rem;
+		max-width: 90%;
+		white-space: pre-wrap;
+	}
+
 	.contentHolder {
 		display: flex;
 		flex-wrap: wrap;
