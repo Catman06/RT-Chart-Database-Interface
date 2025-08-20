@@ -43,7 +43,7 @@
 		</p>
 		<a href="/ValentineDynasty/Downloads/Vehicle Sheet.pdf" target="_blank">VEHICLE SHEET (PDF)</a>
 		<p>++++ Links</p>
-		<p><a href="https://docs.google.com/document/d/1NW5jzjWxolTqlVc6wh2xpsM4EDofjNacQvpMMVWnol4/edit?usp=sharing">DYNASTY INFORMATION DOC</a></p>
+		<p><a href="https://docs.google.com/document/d/1NW5jzjWxolTqlVc6wh2xpsM4EDofjNacQvpMMVWnol4/edit?usp=sharing" target="_blank">DYNASTY INFORMATION DOC</a></p>
 	</div>
 </template>
 
