@@ -11,37 +11,37 @@
 		<p>++++ DOWNLOADS</p>
 		<p>++ IMAGES</p>
 		<p>
-			<a href="Downloads/Heraldry Valentine.svg" download>
+			<a href="/ValentineDynasty/Downloads/Heraldry Valentine.svg" download>
 				VALENTINE HERALDIC ACHEIVEMENT (SVG)
 			</a>
 			 | USES FONTS "<a href="https://www.dafont.com/cloister-black.font" target="_blank">CLOISTER BLACK</a>" & "<a href="https://fonts.google.com/specimen/IM+Fell+English+SC" target="_blank">IM FELL ENGLISH SC</a>"
 		</p>
-		<a href="Downloads/Heraldry Valentine.png" download>
+		<a href="/ValentineDynasty/Downloads/Heraldry Valentine.png" download>
 			<p>VALENTINE HERALDIC ACHEIVEMENT (PNG)</p>
 		</a>
 		<p>
-			<a href="Downloads/Koronus Expanse Printable.svg" download>
+			<a href="/ValentineDynasty/Downloads/Koronus Expanse Printable.svg" download>
 				KORONUS EXPANSE MAP (SVG)
 			</a>
 			 | USES FONTS "<a href="https://fonts.google.com/specimen/IM+Fell+English+SC" target="_blank">IM FELL ENGLISH SC</a>" & "<a href="Downloads/REQUIEM-Inquisitor.otf" download>REQUIEM-INQUISITOR</a>"
 		</p>
-		<a href="Downloads/Valentine Coat of Arms Logo.svg" download>
+		<a href="/ValentineDynasty/Downloads/Valentine Coat of Arms Logo.svg" download>
 			<p>VALENTINE LOGO (SVG)</p>
 		</a>
-		<a href="Downloads/Downloads/Valentine Coat of Arms Logo Greyscale.svg" download>
+		<a href="/ValentineDynasty/Downloads/Valentine Coat of Arms Logo Greyscale.svg" download>
 			<p>VALENTINE LOGO GREYSCALE (SVG)</p>
 		</a>
 		<p>++ PRINTABLES</p>
 		<p>
-			<a href="Downloads/roguetrader_charactersheet_v3_Valentine.pdf" target="_blank">CHARACTER SHEET (PDF)</a>
+			<a href="/ValentineDynasty/Downloads/roguetrader_charactersheet_v3_Valentine.pdf" target="_blank">CHARACTER SHEET (PDF)</a>
 			 | BASED ON <a href="https://georgellovett.wordpress.com/portfolio/rogue-trader-character-sheet-redesign/" target="_blank">THIS</a> SHEET
 		</p>
 		<a href="Downloads/NPC Sheets.pdf" target="_blank">NPC SHEETS (PDF)</a>
 		<p>
-			<a href="Downloads/Ship Sheet.pdf" target="_blank">SHIP SHEET (PDF)</a>
+			<a href="/ValentineDynasty/Downloads/Ship Sheet.pdf" target="_blank">SHIP SHEET (PDF)</a>
 			 | BASED ON THE ONE IN THE CORE RULEBOOK
 		</p>
-		<a href="Downloads/Vehicle Sheet.pdf" target="_blank">VEHICLE SHEET (PDF)</a>
+		<a href="/ValentineDynasty/Downloads/Vehicle Sheet.pdf" target="_blank">VEHICLE SHEET (PDF)</a>
 		<p>++++ Links</p>
 		<p><a href="https://docs.google.com/document/d/1NW5jzjWxolTqlVc6wh2xpsM4EDofjNacQvpMMVWnol4/edit?usp=sharing">DYNASTY INFORMATION DOC</a></p>
 	</div>
