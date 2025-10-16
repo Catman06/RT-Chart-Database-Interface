@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue';
 import ChartDisplay from '../components/ChartDisplay.vue';
 import ChartNew from './ChartNew.vue';
+import ModalFull from './ModalFull.vue';
 
 const locations = ref();
 const options = ref();
@@ -34,9 +35,9 @@ onMounted(async () => {
   form = document.querySelector('form');
   startField = document.querySelector("#startInput");
   endField = document.querySelector("#endInput");
-  
+
   // When startInput is focused, get the possible connections to display
-  startField?.addEventListener('focus', async function(_event) {
+  startField?.addEventListener('focus', async function (_event) {
     // If the field has a value, get and show the possible connections for it
     // If the field is empty, show all locations as suggestions
     if (endField ? endField.value : false) {
@@ -47,7 +48,7 @@ onMounted(async () => {
   })
 
   // When endInput is focused, get the possible connections to display
-  endField?.addEventListener('focus', async function(_event) {
+  endField?.addEventListener('focus', async function (_event) {
     // If the field has a value, get and show the possible connections for it
     // If the field is empty, show all locations as suggestions
     if (startField ? startField.value : false) {
@@ -58,7 +59,7 @@ onMounted(async () => {
   })
 
   // When the 'Get Chart' button is pressed, try to get the requested chart(s)
-  form?.addEventListener('submit', async function(event) {
+  form?.addEventListener('submit', async function (event) {
     event.preventDefault();
 
     charts.value = await getChart(startField?.value ? startField.value : "", endField?.value ? endField.value : "");
@@ -77,8 +78,8 @@ onMounted(async () => {
 
 <template>
   <div id="loginText">
-		<p>// IDENTITY VERIFIED</p>
-		<p>// CHARTS ACCESS GRANTED</p>
+    <p>// IDENTITY VERIFIED</p>
+    <p>// CHARTS ACCESS GRANTED</p>
   </div>
   <form id="locationInput">
     <div class="locationInput">
@@ -98,28 +99,30 @@ onMounted(async () => {
   </form>
   <button type="submit" form="locationInput">Get Charts</button>
   <button type="button" v-if="showNewButton" @click="showNew = true">Make New Chart</button>
-
-  <ChartNew v-if="showNew" :start="startField?.value" :end="endField?.value" @closeModal="showNew = false; showNewButton = false"/>
+  <ModalFull v-if="showNew">
+  </ModalFull>
+  <ChartNew v-if="showNew" :start="startField?.value" :end="endField?.value"
+    @closeModal="showNew = false; showNewButton = false" />
   <div id="charts">
     <ChartDisplay v-for="chart in charts" :chartIn="chart" />
   </div>
 </template>
 
 <style scoped>
-  form {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 3rem;
-    padding: 1rem;
-    margin-top: 4rem;
-  }
+form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 3rem;
+  padding: 1rem;
+  margin-top: 4rem;
+}
 
-  .locationInput {
-    margin: 0rem 2rem 0rem 2rem;
-  }
+.locationInput {
+  margin: 0rem 2rem 0rem 2rem;
+}
 
-  #charts {
-    margin-bottom: 1rem;
-  }
+#charts {
+  margin-bottom: 1rem;
+}
 </style>

@@ -3,13 +3,13 @@
 </script>
 
 <template>
-<Teleport to="#content">
-	<div class="dialog">
-		<div class="dialogContent">
-			<slot></slot>
+	<Teleport to="#content">
+		<div class="dialog">
+			<div class="dialogContent">
+				<slot></slot>
+			</div>
 		</div>
-	</div>
-</Teleport>
+	</Teleport>
 </template>
 
 <style lang="css" scoped>
