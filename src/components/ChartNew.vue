@@ -31,8 +31,7 @@ import { onMounted } from 'vue';
 </script>
 
 <template>
-	<div id="newChartModal">
-		<button id="closeButton" type="button" @click="$emit('closeModal')">X</button>
+<div id="newChartContent">
 		<form id="newChartForm">
 			<div>
 				<div>
@@ -78,11 +77,8 @@ import { onMounted } from 'vue';
 	</template>
 
 <style lang="css" scoped>
-	#newChartModal {
-		position: fixed;
+	#newChartContent {
 		background-color: #1e201c;
-		border-color: inherit;
-		border-style: solid;
 		top: 1vh;
 		height: calc(90vh - 1rem);
 		display: flex;

@@ -99,10 +99,9 @@ onMounted(async () => {
   </form>
   <button type="submit" form="locationInput">Get Charts</button>
   <button type="button" v-if="showNewButton" @click="showNew = true">Make New Chart</button>
-  <ModalFull v-if="showNew">
+  <ModalFull v-if="showNew" @close-pressed="showNew = false; showNewButton = false">
+    <ChartNew :start="startField?.value" :end="endField?.value" />
   </ModalFull>
-  <ChartNew v-if="showNew" :start="startField?.value" :end="endField?.value"
-    @closeModal="showNew = false; showNewButton = false" />
   <div id="charts">
     <ChartDisplay v-for="chart in charts" :chartIn="chart" />
   </div>
