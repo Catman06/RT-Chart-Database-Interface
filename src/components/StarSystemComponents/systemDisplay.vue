@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref, type PropType } from 'vue';
+import { inject, onMounted, ref, type PropType } from 'vue';
 import { StarSystem } from '../../StarSystem';
 import DisplayElement from './displayElement.vue';
 import ModalFull from '../ModalFull.vue';
@@ -10,12 +10,13 @@ const System = defineModel('system', { type: Object as PropType<StarSystem>, def
 const changeModalOpen = ref(false);
 
 const SystemNames = ref();
+let url = inject('phpURL');
 async function getSystemNames() {
-	return (await fetch(`https://zipperserver.duckdns.org/php/systemGetLists.php?col=names`)).json();
+	return (await fetch(`${url}/php/systemGetLists.php?col=names`)).json();
 }
 
 async function getSystemFromID(id: number): Promise<StarSystem> {
-	return (await (await fetch(`https://zipperserver.duckdns.org./php/systemGetContent.php?id=${id}`)).json())[0].system;
+	return (await (await fetch(`${url}/php/systemGetContent.php?id=${id}`)).json())[0].system;
 }
 
 onMounted(async () => {

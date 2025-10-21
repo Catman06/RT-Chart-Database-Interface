@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import { inject, onMounted } from 'vue';
 	const props = defineProps(['start', 'end']);
 	const emit = defineEmits(['closeModal']);
+	let url = inject('phpURL');
 
 	let form: HTMLElement | null;
 	onMounted(() => {
 		form = document.getElementById("newChartForm");
 	})
-
 
 	// Submits the form to the database
 	async function submit(_event: Event) {
@@ -15,7 +15,7 @@ import { onMounted } from 'vue';
 		
 		let formdata = new FormData(form);
 		
-		const response = (await fetch("https://zipperserver.duckdns.org/php/chartAddChart.php", {
+		const response = (await fetch(`${url}/php/chartAddChart.php`, {
 			method: "POST",
 			body: formdata
 		})).json();

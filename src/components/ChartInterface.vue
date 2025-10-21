@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { inject, onMounted, ref } from 'vue';
 import ChartDisplay from '../components/ChartDisplay.vue';
 import ChartNew from './ChartNew.vue';
 import ModalFull from './ModalFull.vue';
@@ -15,17 +15,19 @@ let endField: HTMLInputElement | null;
 
 let showNewButton: boolean = false;
 
+let url = inject('phpURL');
+
 async function getLocations() {
-  return (await fetch("https://zipperserver.duckdns.org/php/chartGetLocations.php")).json();
+  return (await fetch(`${url}/php/chartGetLocations.php`)).json();
 }
 async function getStarts(end: string) {
-  return (await fetch(`https://zipperserver.duckdns.org/php/chartGetPossibleConnections.php?dir=to&location=${end}`)).json();
+  return (await fetch(`${url}/php/chartGetPossibleConnections.php?dir=to&location=${end}`)).json();
 }
 async function getEndpoints(start: string) {
-  return (await fetch(`https://zipperserver.duckdns.org/php/chartGetPossibleConnections.php?dir=from&location=${start}`)).json();
+  return (await fetch(`${url}/php/chartGetPossibleConnections.php?dir=from&location=${start}`)).json();
 }
 async function getChart(start: string, end: string) {
-  return (await fetch(`https://zipperserver.duckdns.org/php/chartGetChart.php?start=${start}&endpoint=${end}`)).json();
+  return (await fetch(`${url}/php/chartGetChart.php?start=${start}&endpoint=${end}`)).json();
 }
 
 onMounted(async () => {

@@ -1,9 +1,16 @@
 <script lang="ts" setup>
-import { onMounted, ref, type Ref } from 'vue';
+import { onMounted, provide, ref, type Ref } from 'vue';
 import ChartInterface from './components/ChartInterface.vue';
 import LandingPage from './components/LandingPage.vue';
 import ArchivePage from './components/ArchivePage.vue';
 import StarSystemInterface from './components/StarSystemInterface.vue';
+
+// Set the env variable for the base of the URL for PHP scripts
+if (import.meta.env.DEV) {
+  provide( "phpURL", "https://kevinserver" );
+} else {
+  provide( "phpURL", "https://zipperserver.duckdns.org" );
+}
 
 onMounted(async () => {
   // Hide the praise of the machine god once the page fully loads

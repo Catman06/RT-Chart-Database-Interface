@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, type PropType, type Ref } from 'vue';
+import { inject, ref, type PropType, type Ref } from 'vue';
 import NewSystemElement from './newSystemElement.vue';
 import { Star, StarSystem, SystemElement, validate } from '../../StarSystem';
 import ModalDialog from '../ModalDialog.vue';
@@ -7,6 +7,7 @@ import ModalDialog from '../ModalDialog.vue';
 const SystemID = defineModel('id', { type: Number });
 const SystemIn = defineModel('system', { type: Object as PropType<StarSystem> });
 const System = ref(SystemIn.value ? SystemIn.value : SystemIn.value = new StarSystem);
+let url = inject('phpURL');
 
 const starKeys: Ref<number[]> = ref([]);
 const elementKeys: Ref<number[]> = ref([]);
@@ -64,12 +65,12 @@ async function saveSystem(event: Event) {
 		dialogSave.value = valid;
 		return;
 	}
-
+	
 	console.log("Saving system");
 	// Check if the system is already in the database via ID
 	let exists = true;
 	try {
-		let response = (await fetch(`https://zipperserver.duckdns.org/php/systemGetLists.php?col=id&query=${SystemID.value}`)).json()
+		let response = (await fetch(`${url}/php/systemGetLists.php?col=id&query=${SystemID.value}`)).json()
 		if ((await response).length = 0) {
 			exists = false;
 		}
@@ -82,7 +83,7 @@ async function saveSystem(event: Event) {
 	let savePromise: Promise<Response>;
 	if (exists) {
 		try {
-			savePromise = fetch("https://zipperserver.duckdns.org/php/systemUpdateSystem.php", {
+			savePromise = fetch(`${url}/php/systemUpdateSystem.php`, {
 				method: "POST",
 				body: JSON.stringify({"id" : SystemID.value, "system" : System.value }),
 			});
@@ -93,7 +94,7 @@ async function saveSystem(event: Event) {
 		}
 	} else {
 		try {
-			savePromise = fetch("https://zipperserver.duckdns.org/php/systemAddSystem.php", {
+			savePromise = fetch(`${url}/php/systemAddSystem.php`, {
 				method: "POST",
 				body: JSON.stringify(System.value),
 			});			
@@ -111,7 +112,7 @@ async function saveSystem(event: Event) {
 
 const dialogDelete = ref(false);
 async function deleteSystem() {
-	await fetch(`https://zipperserver.duckdns.org/php/systemDeleteSystem.php?id=${SystemID.value}`);
+	await fetch(`${url}/php/systemDeleteSystem.php?id=${SystemID.value}`);
 }
 
 const dialogNew = ref(false);
