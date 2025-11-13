@@ -1,13 +1,13 @@
 {
   "name": "rogue-trader-warp-charts",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
-    "deploy": "sudo rm -r /srv/http/nginx/ValentineDynasty/*; sudo cp -r dist/* /srv/http/nginx/ValentineDynasty/ && sudo mv /srv/http/nginx/ValentineDynasty/php/* /srv/http/nginx/php/ && sudo rm -r /srv/http/nginx/ValentineDynasty/php;"
+    "deploy": "vue-tsc -b && vite build && rm -r ../Website_Docker_Compose/docker_webserver/src/roguetrader/*; cp -r ./dist/* ../Website_Docker_Compose/docker_webserver/src/roguetrader/"
   },
   "dependencies": {
     "vue": "^3.5.17"

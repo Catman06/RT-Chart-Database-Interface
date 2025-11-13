@@ -9,7 +9,6 @@ const options = ref();
 const charts = ref();
 const showNew = ref(false);
 
-let form;
 let startField: HTMLInputElement | null;
 let endField: HTMLInputElement | null;
 
@@ -34,7 +33,6 @@ onMounted(async () => {
   let response = await getLocations();
   locations.value = response;
 
-  form = document.querySelector('form');
   startField = document.querySelector("#startInput");
   endField = document.querySelector("#endInput");
 
@@ -61,7 +59,7 @@ onMounted(async () => {
   })
 
   // When the 'Get Chart' button is pressed, try to get the requested chart(s)
-  form?.addEventListener('submit', async function (event) {
+  document.querySelector("button[type=submit]")?.addEventListener('click', async function (event) {
     event.preventDefault();
 
     charts.value = await getChart(startField?.value ? startField.value : "", endField?.value ? endField.value : "");

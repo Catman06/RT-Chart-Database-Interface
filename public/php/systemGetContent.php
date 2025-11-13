@@ -9,7 +9,7 @@ $response = [];
 
 // Create a connection to the db
 try {
-	$dbh = new PDO('pgsql:host=localhost;port=5432;dbname=valentine_dynasty;user=valentine');
+	$dbh = new PDO('pgsql:host=postgresql;port=5432;dbname=valentine_charts;user=valentine', password: 'example');
 	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $ex) {
 	throw new Exception("Connection failed: " . $ex, 1);
@@ -19,10 +19,10 @@ try {
 try {
 	$dbh->beginTransaction();
 	$stmt = $dbh->prepare("SELECT id, system FROM systems WHERE id = ?");
-	$stmt->bindValue(1, $_GET['id']); 
-	
+	$stmt->bindValue(1, $_GET['id']);
+
 	$stmt->execute();
-	$stmt->SetFetchMode(PDO::FETCH_NAMED);
+	$stmt->setFetchMode(PDO::FETCH_NAMED);
 
 	$response += $stmt->fetchAll();
 	$response[0]['system'] = json_decode($response[0]['system']);
