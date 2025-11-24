@@ -34,7 +34,7 @@ async function deleteElement(elementKey: number) {
 
 const landmassKeys: Ref<number[]> = ref([]);
 planet.value.landmasses.forEach(() => {
-	landmassKeys.value.push(elementKeys.value.length);
+	landmassKeys.value.push(landmassKeys.value.length);
 });
 function addLandmass() {
 	let index = landmassKeys.value.length;
