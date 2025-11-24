@@ -100,7 +100,7 @@ onMounted(async () => {
   <button type="submit" form="locationInput">Get Charts</button>
   <button type="button" v-if="showNewButton" @click="showNew = true">Make New Chart</button>
   <ModalFull v-if="showNew" @close-pressed="showNew = false; showNewButton = false">
-    <ChartNew :start="startField?.value" :end="endField?.value" />
+    <ChartNew :start="startField?.value" :end="endField?.value" @close-modal="showNew = false" />
   </ModalFull>
   <div id="charts">
     <ChartDisplay v-for="chart in charts" :chartIn="chart" />
