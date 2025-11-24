@@ -6,7 +6,11 @@ import ArchivePage from './components/ArchivePage.vue';
 import StarSystemInterface from './components/StarSystemInterface.vue';
 
 // Set the base of the URL for PHP scripts
-provide( "phpURL", window.location.origin );
+if (import.meta.env.DEV) {
+	provide("phpURL", "https://roguetrader.kevinkamasaki.com");
+} else {
+	provide( "phpURL", window.location.origin );
+}
 
 onMounted(async () => {
   // Hide the praise of the machine god once the page fully loads
