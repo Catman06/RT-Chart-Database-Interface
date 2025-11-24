@@ -65,7 +65,7 @@ async function saveSystem(event: Event) {
 		dialogSave.value = valid;
 		return;
 	}
-	
+
 	console.log("Saving system");
 	// Check if the system is already in the database via ID
 	let exists = true;
@@ -78,7 +78,7 @@ async function saveSystem(event: Event) {
 		console.error("Failed to retrieve IDs in the database", error);
 		dialogSave.value = ["Failed to retrieve IDs from the database"];
 	}
-	
+
 	console.log(exists);
 	let savePromise: Promise<Response>;
 	if (exists) {
@@ -97,7 +97,7 @@ async function saveSystem(event: Event) {
 			savePromise = fetch(`${url}/php/systemAddSystem.php`, {
 				method: "POST",
 				body: JSON.stringify(System.value),
-			});			
+			});
 		} catch (error) {
 			console.error("Failed to save the new system to the database", error);
 			dialogSave.value = ["Failed to save the new system to the database"];
@@ -233,21 +233,20 @@ async function newSystem() {
 	& .addButton {
 		margin: .5rem auto auto auto;
 	}
-	
+
 }
 
 & .subObjectHolder {
 	width: 90%;
 	margin: auto;
 	display: flex;
-	align-items: center;
 	flex-wrap: wrap;
-
+	align-items: flex-start;
 	& .subObject {
 		background-color: var(--light_background);
 		border: 2px solid var(--line_color);
-		margin: auto;
 		width: 49%;
+		margin: 0 auto;
 		&>* {
 			margin: auto;
 		}
