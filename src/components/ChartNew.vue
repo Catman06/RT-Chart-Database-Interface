@@ -12,9 +12,9 @@ import { inject, onMounted } from 'vue';
 	// Submits the form to the database
 	async function submit(_event: Event) {
 		if (!(form instanceof HTMLFormElement)) { return };
-		
+
 		let formdata = new FormData(form);
-		
+
 		const response = (await fetch(`${url}/php/chartAddChart.php`, {
 			method: "POST",
 			body: formdata
@@ -52,7 +52,7 @@ import { inject, onMounted } from 'vue';
 					<label for="duration">Travel Duration</label>
 					<input id="newDuration" type="number" name="duration" value="0">
 				</div>
-				<div>	
+				<div>
 					<label for="quality">Chart Quality</label>
 					<input id="newQuality" name="quality">
 				</div>
