@@ -43,6 +43,9 @@ function deleteLandmark(landmarkKey: number) {
 	territory.value.landmarks.splice(index, 1);
 	landmarkKeys.value.splice(index, 1);
 }
+
+const traitsOpen = ref(false);
+const landmarksOpen = ref(false);
 </script>
 
 <template>
@@ -56,7 +59,8 @@ function deleteLandmark(landmarkKey: number) {
 	<label>Info
 		<textarea v-model="territory.info" />
 	</label>
-	<div id="traits">
+	<button @click="traitsOpen = !traitsOpen">Traits</button>
+	<div id="traits" v-if="traitsOpen">
 		<template v-for="traitKey in traitKeys" :key="traitKey">
 			<div class="trait">
 				<div>
@@ -72,7 +76,8 @@ function deleteLandmark(landmarkKey: number) {
 		</template>
 		<button class="addButton" type="button" @click="addTrait">Add Trait</button>
 	</div>
-	<div id="landmarks">
+	<button @click="landmarksOpen = !landmarksOpen">Landmarks</button>
+	<div id="landmarks" v-if="landmarksOpen">
 		<template v-for="landmarkKey in landmarkKeys" :key="landmarkKey">
 			<div class="landmark">
 				<div>
