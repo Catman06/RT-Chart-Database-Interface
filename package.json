@@ -10,7 +10,7 @@
     "deploy": "vue-tsc -b && vite build && rm -r ../Website_Docker_Compose/docker_webserver/src/roguetrader/*; cp -r ./dist/* ../Website_Docker_Compose/docker_webserver/src/roguetrader/"
   },
   "dependencies": {
-    "vue": "^3.5.17"
+    "vue": "^3.5.26"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.0",
