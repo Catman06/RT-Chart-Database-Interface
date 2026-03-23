@@ -7,9 +7,9 @@ import StarSystemInterface from './components/StarSystemInterface.vue';
 
 // Set the base of the URL for PHP scripts
 if (import.meta.env.DEV) {
-	provide("phpURL", "https://roguetrader.kevinkamasaki.com");
+  provide("phpURL", "https://roguetrader.kevinkamasaki.com");
 } else {
-	provide( "phpURL", window.location.origin );
+  provide("phpURL", window.location.origin);
 }
 
 onMounted(async () => {
@@ -44,7 +44,7 @@ onMounted(() => {
   });
   const navElement: HTMLElement | null = document.querySelector('#navbar');
   if (navElement)
-    observer.observe(navElement, { box: 'border-box'});
+    observer.observe(navElement, { box: 'border-box' });
 })
 </script>
 
@@ -55,6 +55,7 @@ onMounted(() => {
       <ChartInterface v-else-if="tab == 1" />
       <ArchivePage v-else-if="tab == 2" />
       <StarSystemInterface v-else-if="tab == 3" />
+      <DamageCalculator v-else-if="tab == 4" />
     </div>
   </div>
 
@@ -65,12 +66,14 @@ onMounted(() => {
       <p class="navTabs" @click="switchTab(1)">Charts</p>
       <p class="navTabs" @click="switchTab(2)">Archive</p>
       <p class="navTabs" @click="switchTab(3)">Systems</p>
+      <p class="navTabs" @click="switchTab(4)">Damage</p>
     </div>
   </div>
 </template>
 
 <style lang="css" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
 #navbar {
   --navbar_color: #525148;
   position: fixed;
@@ -88,6 +91,7 @@ onMounted(() => {
     height: 3.2rem;
   }
 }
+
 #navTabHolder {
   display: flex;
   flex-wrap: wrap;
@@ -95,6 +99,7 @@ onMounted(() => {
   border: .2rem inset #68675c;
   margin: auto;
 }
+
 .navTabs {
   --tab_color: #aa9f73;
   --tab_border: #c4b16d;
@@ -108,14 +113,17 @@ onMounted(() => {
   padding: .5rem;
   cursor: pointer;
 }
+
 .navTabs:hover {
   background-color: lch(from var(--tab_color) calc(l + 10) c h);
   border-color: lch(from var(--tab_border) calc(l + 5) c h);
 }
+
 .navTabs:active {
   background-color: lch(from var(--tab_color) calc(l - 15) c h);
   border-color: lch(from var(--tab_border) calc(l - 20) c h);
 }
+
 .navTabs.pressed {
   background-color: lch(from var(--tab_color) calc(l - 10) c h);
   border-color: lch(from var(--tab_border) calc(l - 15) c h);
