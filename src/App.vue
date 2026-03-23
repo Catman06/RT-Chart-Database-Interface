@@ -55,7 +55,7 @@ onMounted(() => {
       <ChartInterface v-else-if="tab == 1" />
       <ArchivePage v-else-if="tab == 2" />
       <StarSystemInterface v-else-if="tab == 3" />
-      <DamageCalculator v-else-if="tab == 4" />
+      <DamageCalculatorInterface v-else-if="tab == 4" />
     </div>
   </div>
 
