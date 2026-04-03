@@ -4,6 +4,7 @@ import ChartInterface from './components/ChartInterface.vue';
 import LandingPage from './components/LandingPage.vue';
 import ArchivePage from './components/ArchivePage.vue';
 import StarSystemInterface from './components/StarSystemInterface.vue';
+import DamageCalculatorInterface from './components/DamageCalculatorInterface.vue';
 
 // Set the base of the URL for PHP scripts
 if (import.meta.env.DEV) {
