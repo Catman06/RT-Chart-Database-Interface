@@ -124,6 +124,7 @@ function dealDamage(location: string) {
 			</tbody>
 		</table>
 	</form>
+	<div class="separator"></div>
 	<form id="damageInput">
 		<div class="numInput">
 			<label for="damage">Damage Dealt</label>
@@ -201,5 +202,11 @@ form {
 	>* {
 		margin: 10px;
 	}
+}
+.separator {
+	display: block;
+	height: 3px;
+	background-color: var(--line_color);
+	margin: 1rem;
 }
 </style>
